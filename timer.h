@@ -10,15 +10,13 @@ class Timer {
         unsigned long previous_millis;
         unsigned long current_millis;
         bool is_running;
-        uint8_t pos_cursor;
-
     public:
         Timer();
         ~Timer();
-        void mv_cur_up();
-        void mv_cur_down();
-        void mv_cur_left();
-        void mv_cur_right();
+        void mv_cur_up(uint8_t* pos_cursor);
+        void mv_cur_down(uint8_t* pos_cursor);
+        void mv_cur_left(uint8_t* pos_cursor);
+        void mv_cur_right(uint8_t* pos_cursor);
         void pause();
         void toggle();
         void reset();

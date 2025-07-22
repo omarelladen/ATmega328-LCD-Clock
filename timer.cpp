@@ -6,8 +6,7 @@ minute(30),
 hour(0),
 previous_millis(millis()),
 current_millis(0),
-is_running(false),
-pos_cursor(8)
+is_running(false)
 {
 }
 
@@ -15,49 +14,118 @@ Timer::~Timer()
 {
 }
 
-void Timer::mv_cur_up()
+void Timer::mv_cur_up(uint8_t* pos_cursor)
 {
-    switch(pos_cursor)
+    switch(*pos_cursor)
     {
     case 8:
+        if(this->hour >= 90)
+            this->hour -= 90;
+        else
+            this->hour += 10;
         break;
     case 9:
+        if(this->hour % 10 == 9)
+            this->hour -= 9;
+        else
+            this->hour++;
         break;
+
     case 11:
+        if(this->minute >= 50)
+            this->minute -= 50;
+        else
+            this->minute += 10;
         break;
     case 12:
+        if(this->minute % 10 == 9)
+            this->minute -= 9;
+        else
+            this->minute++;
         break;
+
     case 14:
+        if(this->second >= 50)
+            this->second -= 50;
+        else
+            this->second += 10;
         break;
     case 15:
+        if(this->second % 10 == 9)
+            this->second -= 9;
+        else
+            this->second++;
         break;
     default:
         break;
     }
 }
-void Timer::mv_cur_down()
+void Timer::mv_cur_down(uint8_t* pos_cursor)
 {
-
-}
-
-void Timer::mv_cur_left()
-{
-    if(this->pos_cursor > 8)
+    switch(*pos_cursor)
     {
-        if(pos_cursor == 11 || pos_cursor == 14)
-            this->pos_cursor -= 2;
+    case 8:
+        if(this->hour <= 10)
+            this->hour += 90;
         else
-            this->pos_cursor--;
+            this->hour -= 10;
+        break;
+    case 9:
+        if(this->hour % 10 == 0)
+            this->hour += 9;
+        else
+            this->hour--;
+        break;
+
+    case 11:
+        if(this->minute < 10)
+            this->minute += 50;
+        else
+            this->minute -= 10;
+        break;
+    case 12:
+        if(this->minute % 10 == 0)
+            this->minute += 9;
+        else
+            this->minute--;
+        break;
+
+    case 14:
+        if(this->second < 10)
+            this->second += 50;
+        else
+            this->second -= 10;
+        break;
+    case 15:
+        if(this->second % 10 == 0)
+            this->second += 9;
+        else
+            this->second--;
+        break;
+    default:
+        break;
     }
 }
-void Timer::mv_cur_right()
+
+void Timer::mv_cur_left(uint8_t* pos_cursor)
 {
-    if(this->pos_cursor < 15)
+    if(*pos_cursor > 7)
     {
-        if(pos_cursor == 9 || pos_cursor == 12)
-            this->pos_cursor += 2;
+        if(*pos_cursor == 11 || *pos_cursor == 14)
+            *pos_cursor -= 2;
         else
-            this->pos_cursor++;
+            (*pos_cursor)--;
+    }
+}
+void Timer::mv_cur_right(uint8_t* pos_cursor)
+{
+
+    if(*pos_cursor < 15)
+    {
+        if(*pos_cursor == 9 || *pos_cursor == 12)
+            *pos_cursor += 2;
+        else
+            (*pos_cursor)++;
     }
 }
 
@@ -137,9 +205,6 @@ void Timer::print(LiquidCrystal* lcd) const
     lcd->print(F(":"));
     lcd->setCursor(13, 0);
     lcd->print(F(":"));
-
-    lcd->setCursor(this->pos_cursor, 1);
-    lcd->print(F("_"));
 }
 
 void Timer::update()
