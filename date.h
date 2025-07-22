@@ -2,8 +2,11 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
-class Chronometer {
+class Date {
     private:
+        uint8_t day;
+        uint8_t month;
+        uint8_t year;
         uint8_t second;
         uint8_t minute;
         uint8_t hour;
@@ -12,8 +15,8 @@ class Chronometer {
         bool is_running;
 
     public:
-        Chronometer();
-        ~Chronometer();
+        Date();
+        ~Date();
         void pause();
         void toggle();
         void reset();

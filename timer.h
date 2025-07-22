@@ -2,7 +2,7 @@
 #include <Arduino.h>
 #include <LiquidCrystal.h>
 
-class Chronometer {
+class Timer {
     private:
         uint8_t second;
         uint8_t minute;
@@ -10,10 +10,15 @@ class Chronometer {
         unsigned long previous_millis;
         unsigned long current_millis;
         bool is_running;
+        uint8_t pos_cursor;
 
     public:
-        Chronometer();
-        ~Chronometer();
+        Timer();
+        ~Timer();
+        void mv_cur_up();
+        void mv_cur_down();
+        void mv_cur_left();
+        void mv_cur_right();
         void pause();
         void toggle();
         void reset();

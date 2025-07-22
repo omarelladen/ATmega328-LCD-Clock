@@ -1,25 +1,28 @@
-#include "chronometer.h"
+#include "date.h"
 
-Chronometer::Chronometer():
+Date::Date():
+day(22),
+month(7),
+year(25),
 second(0),
-minute(0),
-hour(98),
+minute(20),
+hour(17),
 previous_millis(millis()),
 current_millis(0),
-is_running(false)
+is_running(true)
 {
 }
 
-Chronometer::~Chronometer()
+Date::~Date()
 {
 }
 
-void Chronometer::pause()
+void Date::pause()
 {
     this->is_running=false;
 }
 
-void Chronometer::toggle()
+void Date::toggle()
 {
     if(is_running)
         is_running = false;
@@ -30,13 +33,13 @@ void Chronometer::toggle()
     }
 }
 
-void Chronometer::reset()
+void Date::reset()
 {
     this->second=this->minute=this->hour=0;
     this->is_running=false;
 }
 
-void Chronometer::secondCount()
+void Date::secondCount()
 {
     this->second++;
     if(this->second == 60)
@@ -51,8 +54,42 @@ void Chronometer::secondCount()
     }
 }
 
-void Chronometer::print(LiquidCrystal* lcd) const
+void Date::print(LiquidCrystal* lcd) const
 {
+    if(this->day >= 10)
+        lcd->setCursor(8, 1);
+    else
+    {
+        lcd->setCursor(8, 1);
+        lcd->print(0);
+
+        lcd->setCursor(9, 1);
+    }
+    lcd->print(this->day);
+
+    if(this->month >= 10)
+        lcd->setCursor(11, 1);
+    else
+    {
+        lcd->setCursor(11, 1);
+        lcd->print(0);
+
+        lcd->setCursor(12, 1);
+    }
+    lcd->print(this->month);
+
+    if(this->year >= 10)
+        lcd->setCursor(14, 1);
+    else
+    {
+        lcd->setCursor(14, 1);
+        lcd->print(0);
+
+        lcd->setCursor(15, 1);
+    }
+    lcd->print(this->year);
+
+
     if(this->hour >= 10)
         lcd->setCursor(8, 0);
     else
@@ -90,26 +127,25 @@ void Chronometer::print(LiquidCrystal* lcd) const
     lcd->print(F(":"));
     lcd->setCursor(13, 0);
     lcd->print(F(":"));
+
+    lcd->setCursor(10, 1);
+    lcd->print(F("/"));
+    lcd->setCursor(13, 1);
+    lcd->print(F("/"));
 }
 
-void Chronometer::update()
+void Date::update()
 {
     this->current_millis = millis();
-    if(this->current_millis - this->previous_millis >= 1)
+    if(this->current_millis - this->previous_millis >= 1000)
     {
         this->previous_millis = this->current_millis;
         this->secondCount();
     }
 }
 
-void Chronometer::execute()
+void Date::execute()
 {
-    if(this->hour > 99)
-    {
-        is_running = false;
-        this->hour = 0; // restart
-    }
-
     if(this->is_running)
         this->update();
 }
