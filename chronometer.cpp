@@ -1,12 +1,12 @@
 #include "chronometer.h"
 
 Chronometer::Chronometer():
-s(0),
-m(0),
-h(0),
+second(0),
+minute(0),
+hour(98),
 previous_millis(millis()),
 current_millis(0),
-chronometer_is_running(false)
+is_running(false)
 {
 }
 
@@ -14,52 +14,46 @@ Chronometer::~Chronometer()
 {
 }
 
-uint8_t Chronometer::getS() const {return this->s;}
-
-uint8_t Chronometer::getM() const {return this->m;}
-
-uint8_t Chronometer::getH() const {return this->h;}
-
 void Chronometer::pause()
 {
-    this->chronometer_is_running=false;
+    this->is_running=false;
 }
 
 void Chronometer::toggle()
 {
-    if(chronometer_is_running)
-        chronometer_is_running = false;
+    if(is_running)
+        is_running = false;
     else
     {
-        this->chronometer_is_running = true;
+        this->is_running = true;
         this->previous_millis = millis() - (this->current_millis - this->previous_millis);
     }
 }
 
 void Chronometer::reset()
 {
-    this->s=this->m=this->h=0;
-    this->chronometer_is_running=false;
+    this->second=this->minute=this->hour=0;
+    this->is_running=false;
 }
 
-void Chronometer::secCount()
+void Chronometer::secondCount()
 {
-    this->s++;
-    if(this->s == 60)
+    this->second++;
+    if(this->second == 60)
     {
-        this->s = 0;
-        this->m++;
+        this->second = 0;
+        this->minute++;
     }
-    if(this->m == 60)
+    if(this->minute == 60)
     {
-        this->m = 0;
-        this->h++;
+        this->minute = 0;
+        this->hour++;
     }
 }
 
 void Chronometer::print(LiquidCrystal* lcd) const
 {
-    if(this->h >= 10)
+    if(this->hour >= 10)
         lcd->setCursor(8, 0);
     else
     {
@@ -68,9 +62,9 @@ void Chronometer::print(LiquidCrystal* lcd) const
 
         lcd->setCursor(9, 0);
     }
-    lcd->print(this->h);
+    lcd->print(this->hour);
 
-    if(this->m >= 10)
+    if(this->minute >= 10)
         lcd->setCursor(11, 0);
     else
     {
@@ -79,9 +73,9 @@ void Chronometer::print(LiquidCrystal* lcd) const
 
         lcd->setCursor(12, 0);
     }
-    lcd->print(this->m);
+    lcd->print(this->minute);
 
-    if(this->s >= 10)
+    if(this->second >= 10)
         lcd->setCursor(14, 0);
     else
     {
@@ -90,7 +84,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
 
         lcd->setCursor(15, 0);
     }
-    lcd->print(this->s);
+    lcd->print(this->second);
 
     lcd->setCursor(10, 0);
     lcd->print(F(":"));
@@ -101,15 +95,21 @@ void Chronometer::print(LiquidCrystal* lcd) const
 void Chronometer::update()
 {
     this->current_millis = millis();
-    if(this->current_millis - this->previous_millis >= 1000)
+    if(this->current_millis - this->previous_millis >= 1)
     {
         this->previous_millis = this->current_millis;
-        this->secCount();
+        this->secondCount();
     }
 }
 
 void Chronometer::execute()
 {
-    if(this->chronometer_is_running)
+    if(this->hour > 99)
+    {
+        is_running = false;
+        this->hour = 0; // restart
+    }
+
+    if(this->is_running)
         this->update();
 }
