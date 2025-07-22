@@ -16,6 +16,7 @@ Date date;
 Timer timer;
 Chronometer chrono;
 uint8_t current_menu = 0;
+uint8_t pos_cursor = 7;
 
 void setup()
 {
@@ -52,7 +53,7 @@ void left()
         chrono.reset();
         break;
     case 5:
-        timer.mv_cur_left();
+        timer.mv_cur_left(&pos_cursor);
         break;
     case 6:
         break;
@@ -81,7 +82,7 @@ void right()
     case 4:
         break;
     case 5:
-        timer.mv_cur_right();
+        timer.mv_cur_right(&pos_cursor);
         break;
     case 6:
         break;
@@ -94,23 +95,72 @@ void right()
 
 void up()
 {
-    if(current_menu > 0)
+    if(pos_cursor == 7)
     {
-        current_menu--;
-        lcd_is_clean = false;
+       if(current_menu > 0)
+        {
+            current_menu--;
+            lcd_is_clean = false;
+        }
+    } 
+    else
+    {
+        switch(current_menu)
+        {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            timer.mv_cur_up(&pos_cursor);
+            break;
+        case 6:
+            break;
+        default:
+            break;
+        }
     }
-
 }
 
 void down()
 {
-
-    if(current_menu < NUM_SCREENS - 1)
+    if(pos_cursor == 7)
     {
-        current_menu++;
-        lcd_is_clean = false;
+        if(current_menu < NUM_SCREENS - 1)
+        {
+            current_menu++;
+            lcd_is_clean = false;
+        }
     }
-
+    else
+    {
+        switch(current_menu)
+        {
+        case 0:
+            break;
+        case 1:
+            break;
+        case 2:
+            break;
+        case 3:
+            break;
+        case 4:
+            break;
+        case 5:
+            timer.mv_cur_down(&pos_cursor);
+            break;
+        case 6:
+            break;
+        default:
+            break;
+        }
+    }
 }
 
 void select()
@@ -259,5 +309,8 @@ void loop()
     date.execute();
     chrono.execute();
     timer.execute();
+
+    lcd.setCursor(pos_cursor, 1);
+    lcd.print(F("_"));
     
 }
