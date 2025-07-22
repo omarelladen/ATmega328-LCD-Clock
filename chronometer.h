@@ -21,7 +21,7 @@ class Chronometer {
         void toggle();
         void reset();
         void secCount();
-        void print(LiquidCrystal lcd) const;
+        void print(LiquidCrystal* lcd) const;
         void update();
         void execute();
 };
