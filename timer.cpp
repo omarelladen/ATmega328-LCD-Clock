@@ -14,7 +14,7 @@ Timer::~Timer()
 {
 }
 
-void Timer::mv_cur_up(uint8_t* pos_cursor)
+void Timer::mv_cur_up(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -60,7 +60,7 @@ void Timer::mv_cur_up(uint8_t* pos_cursor)
         break;
     }
 }
-void Timer::mv_cur_down(uint8_t* pos_cursor)
+void Timer::mv_cur_down(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -127,12 +127,12 @@ void Timer::toggle()
 void Timer::secondCount()
 {
     this->second--;
-    if(this->second == 255)
+    if(this->second == -1)
     {
         this->second = 59;  ///// -1
         this->minute--;
     }
-    if(this->minute == 255)
+    if(this->minute == -1)
     {
         this->minute = 59;
         this->hour--;
@@ -145,41 +145,41 @@ void Timer::print(LiquidCrystal* lcd) const
     lcd->print(F("Timer"));
 
     if(this->hour >= 10)
-        lcd->setCursor(8, 1);
+        lcd->setCursor(8, 0);
     else
     {
-        lcd->setCursor(8, 1);
+        lcd->setCursor(8, 0);
         lcd->print(0);
 
-        lcd->setCursor(9, 1);
+        lcd->setCursor(9, 0);
     }
     lcd->print(this->hour);
 
     if(this->minute >= 10)
-        lcd->setCursor(11, 1);
+        lcd->setCursor(11, 0);
     else
     {
-        lcd->setCursor(11, 1);
+        lcd->setCursor(11, 0);
         lcd->print(0);
 
-        lcd->setCursor(12, 1);
+        lcd->setCursor(12, 0);
     }
     lcd->print(this->minute);
 
     if(this->second >= 10)
-        lcd->setCursor(14, 1);
+        lcd->setCursor(14, 0);
     else
     {
-        lcd->setCursor(14, 1);
+        lcd->setCursor(14, 0);
         lcd->print(0);
 
-        lcd->setCursor(15, 1);
+        lcd->setCursor(15, 0);
     }
     lcd->print(this->second);
 
-    lcd->setCursor(10, 1);
+    lcd->setCursor(10, 0);
     lcd->print(F(":"));
-    lcd->setCursor(13, 1);
+    lcd->setCursor(13, 0);
     lcd->print(F(":"));
 }
 

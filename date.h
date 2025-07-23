@@ -4,12 +4,12 @@
 
 class Date {
     private:
-        uint8_t day;
-        uint8_t month;
-        uint8_t year;
-        uint8_t second;
-        uint8_t minute;
-        uint8_t hour;
+        int day;
+        int month;
+        int year;
+        int second;
+        int minute;
+        int hour;
         unsigned long previous_millis;
         unsigned long current_millis;
         bool is_running;

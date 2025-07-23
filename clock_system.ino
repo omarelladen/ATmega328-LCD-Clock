@@ -1,22 +1,17 @@
-//#include <avr/pgmspace.h>
-// #include <Arduino.h>
-#include <LiquidCrystal.h>
 #include "clock_system.h"
-#include "chronometer.h"
-#include "date.h"
-#include "timer.h"
 
-#define NUM_SCREENS 7
+
 
 LiquidCrystal lcd(PIN_RS,PIN_EN,PIN_D4,PIN_D5,PIN_D6,PIN_D7);
-int8_t prev_bt_state = BT_NONE;
+int prev_bt_state = BT_NONE;
 unsigned long bt_delay = 0;
 bool lcd_is_clean = false;
 Date date;
 Timer timer;
 Chronometer chrono;
-uint8_t current_menu = 1;
-uint8_t pos_cursor = 7;
+Alarm alarm;
+int current_menu = 1;
+int pos_cursor = 7;
 
 void setup()
 {
@@ -47,10 +42,9 @@ void left()
             else
                 pos_cursor--;
         }
-
-        lcd_is_clean = false;
     }
 
+    lcd_is_clean = false;
 }
 
 void right()
@@ -171,18 +165,14 @@ void select()
 void toggleLight()
 {
     if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
-    {
         PORTB&=!(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, LOW);
-    }
     else
-    {
         PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH);
-    }
 
     lcd_is_clean = false;
 }
 
-void botaoSolto(int8_t bt)
+void botaoSolto(int bt)
 {
     if (bt == BT_DOWN)
         down();
@@ -196,11 +186,11 @@ void botaoSolto(int8_t bt)
         right();
 }
 
-uint8_t checkButtonPress()
+int checkButtonPress()
 {
     int16_t bt_analog_value = analogRead(PIN_BOTOES);
 
-    int8_t bt = -1;
+    int bt = -1;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = (BT_SELECT);
     else if((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
@@ -217,19 +207,12 @@ uint8_t checkButtonPress()
     return bt;
 }
 
-void handleButtonPress(int8_t bt)
+void handleButtonPress(int bt)
 {
 
     //Quando o botao for apertado ou solto
     if((millis() - bt_delay) > DEBOUNCE_TIME)
     {
-        // Apertado
-        // if ((bt != BT_NONE) and (prev_bt_state == BT_NONE) )
-        // {
-        //   bt_delay = millis();
-        // }
-
-        // Solto
         if((bt == BT_NONE) and (prev_bt_state != BT_NONE) )
         {
             botaoSolto(prev_bt_state);
@@ -242,7 +225,7 @@ void handleButtonPress(int8_t bt)
 
 void loop()
 {
-    uint8_t bt_pressed = checkButtonPress();
+    int bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
 
@@ -272,8 +255,8 @@ void loop()
         timer.print(&lcd);
         break;
     case 6:
+        alarm.print(&lcd);
         break;
-        //alarm.print(&lcd);
     default:
         break;
     }
@@ -285,6 +268,8 @@ void loop()
     chrono.execute();
     timer.execute();
 
+
+    // Print cursor
     if(pos_cursor == 7)
     {
         lcd.setCursor(0, 0);
