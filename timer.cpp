@@ -107,27 +107,6 @@ void Timer::mv_cur_down(uint8_t* pos_cursor)
     }
 }
 
-void Timer::mv_cur_left(uint8_t* pos_cursor)
-{
-    if(*pos_cursor > 7)
-    {
-        if(*pos_cursor == 11 || *pos_cursor == 14)
-            *pos_cursor -= 2;
-        else
-            (*pos_cursor)--;
-    }
-}
-void Timer::mv_cur_right(uint8_t* pos_cursor)
-{
-
-    if(*pos_cursor < 15)
-    {
-        if(*pos_cursor == 9 || *pos_cursor == 12)
-            *pos_cursor += 2;
-        else
-            (*pos_cursor)++;
-    }
-}
 
 void Timer::pause()
 {
@@ -143,12 +122,6 @@ void Timer::toggle()
         this->is_running = true;
         this->previous_millis = millis() - (this->current_millis - this->previous_millis);
     }
-}
-
-void Timer::reset()
-{
-    this->second=this->minute=this->hour=0;
-    this->is_running=false;
 }
 
 void Timer::secondCount()
@@ -168,49 +141,52 @@ void Timer::secondCount()
 
 void Timer::print(LiquidCrystal* lcd) const
 {
+    lcd->setCursor(1, 0);
+    lcd->print(F("Timer"));
+
     if(this->hour >= 10)
-        lcd->setCursor(8, 0);
+        lcd->setCursor(8, 1);
     else
     {
-        lcd->setCursor(8, 0);
+        lcd->setCursor(8, 1);
         lcd->print(0);
 
-        lcd->setCursor(9, 0);
+        lcd->setCursor(9, 1);
     }
     lcd->print(this->hour);
 
     if(this->minute >= 10)
-        lcd->setCursor(11, 0);
+        lcd->setCursor(11, 1);
     else
     {
-        lcd->setCursor(11, 0);
+        lcd->setCursor(11, 1);
         lcd->print(0);
 
-        lcd->setCursor(12, 0);
+        lcd->setCursor(12, 1);
     }
     lcd->print(this->minute);
 
     if(this->second >= 10)
-        lcd->setCursor(14, 0);
+        lcd->setCursor(14, 1);
     else
     {
-        lcd->setCursor(14, 0);
+        lcd->setCursor(14, 1);
         lcd->print(0);
 
-        lcd->setCursor(15, 0);
+        lcd->setCursor(15, 1);
     }
     lcd->print(this->second);
 
-    lcd->setCursor(10, 0);
+    lcd->setCursor(10, 1);
     lcd->print(F(":"));
-    lcd->setCursor(13, 0);
+    lcd->setCursor(13, 1);
     lcd->print(F(":"));
 }
 
 void Timer::update()
 {
     this->current_millis = millis();
-    if(this->current_millis - this->previous_millis >= 1)
+    if(this->current_millis - this->previous_millis >= 1000)
     {
         this->previous_millis = this->current_millis;
         this->secondCount();

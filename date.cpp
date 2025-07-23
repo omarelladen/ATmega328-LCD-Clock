@@ -5,8 +5,8 @@ day(22),
 month(7),
 year(25),
 second(0),
-minute(20),
-hour(17),
+minute(5),
+hour(22),
 previous_millis(millis()),
 current_millis(0),
 is_running(true)
@@ -42,6 +42,7 @@ void Date::reset()
 void Date::secondCount()
 {
     this->second++;
+
     if(this->second == 60)
     {
         this->second = 0;
@@ -51,6 +52,25 @@ void Date::secondCount()
     {
         this->minute = 0;
         this->hour++;
+    }
+    if(this->hour == 24)
+    {
+        this->hour = 0;
+        this->day++;
+    }
+    if(this->day == 31)
+    {
+        this->day = 0;
+        this->month++;
+    }
+    if(this->month == 13)
+    {
+        this->month = 0;
+        this->year++;
+    }
+    if(this->year == 100)
+    {
+        this->year = 0;
     }
 }
 
@@ -134,6 +154,19 @@ void Date::print(LiquidCrystal* lcd) const
     lcd->print(F("/"));
 }
 
+void Date::print_date(LiquidCrystal* lcd) const
+{
+    lcd->setCursor(1, 0);
+    lcd->print(F("Date"));
+}
+
+void Date::print_time(LiquidCrystal* lcd) const
+{
+    lcd->setCursor(1, 0);
+    lcd->print(F("Time"));
+}
+
+
 void Date::update()
 {
     this->current_millis = millis();
@@ -146,6 +179,8 @@ void Date::update()
 
 void Date::execute()
 {
+
+
     if(this->is_running)
         this->update();
 }

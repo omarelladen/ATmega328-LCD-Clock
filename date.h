@@ -22,6 +22,8 @@ class Date {
         void reset();
         void secondCount();
         void print(LiquidCrystal* lcd) const;
+        void print_date(LiquidCrystal* lcd) const;
+        void print_time(LiquidCrystal* lcd) const;
         void update();
         void execute();
 };
