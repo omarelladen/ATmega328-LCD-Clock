@@ -17,6 +17,10 @@ class Date {
     public:
         Date();
         ~Date();
+        void mv_cur_up_date(int* pos_cursor);
+        void mv_cur_down_date(int* pos_cursor);
+        void mv_cur_up_time(int* pos_cursor);
+        void mv_cur_down_time(int* pos_cursor);
         void pause();
         void toggle();
         void reset();

@@ -82,8 +82,10 @@ void bt_up()
         case 1:
             break;
         case 2:
+            date.mv_cur_up_date(&pos_cursor);
             break;
         case 3:
+            date.mv_cur_up_time(&pos_cursor);
             break;
         case 4:
             chrono.mv_cur_up(&pos_cursor);
@@ -118,8 +120,10 @@ void bt_down()
         case 1:
             break;
         case 2:
+            date.mv_cur_down_date(&pos_cursor);
             break;
         case 3:
+            date.mv_cur_down_time(&pos_cursor);
             break;
         case 4:
             chrono.mv_cur_down(&pos_cursor);
