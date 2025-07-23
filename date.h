@@ -23,7 +23,6 @@ class Date {
         void mv_cur_down_time(int* pos_cursor);
         void pause();
         void toggle();
-        void reset();
         void secondCount();
         void print(LiquidCrystal* lcd) const;
         void print_date(LiquidCrystal* lcd) const;

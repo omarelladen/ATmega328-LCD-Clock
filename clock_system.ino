@@ -38,7 +38,6 @@ void bt_left()
         if(pos_cursor == 8)
         {
             pos_cursor = 0;
-
             lcd_is_clean = false;
         }
         else if(pos_cursor > 8)
@@ -47,7 +46,6 @@ void bt_left()
                 pos_cursor -= 2;
             else
                 pos_cursor--;
-
             lcd_is_clean = false;
         }
     }
@@ -56,7 +54,6 @@ void bt_left()
         if(pos_cursor == 3)
         {
             pos_cursor = 0;
-
             lcd_is_clean = false;
         }
         else if(pos_cursor > 2)
@@ -67,7 +64,6 @@ void bt_left()
                 pos_cursor -= 3;
             else
                 pos_cursor--;
-
             lcd_is_clean = false;
         } 
     }
@@ -80,7 +76,6 @@ void bt_right()
         if(pos_cursor == 0)
         {
             pos_cursor = 8;
-
             lcd_is_clean = false;
         }
         else if(pos_cursor < 15)
@@ -89,7 +84,6 @@ void bt_right()
                 pos_cursor += 2;
             else
                 pos_cursor++;
-
             lcd_is_clean = false;
         }
     }
@@ -98,7 +92,6 @@ void bt_right()
         if(pos_cursor == 0)
         {
             pos_cursor = 3;
-
             lcd_is_clean = false;
         }
         else if(pos_cursor < 14)
@@ -109,7 +102,6 @@ void bt_right()
                 pos_cursor += 3;
             else
                 pos_cursor++;
-
             lcd_is_clean = false;
         }
     }
@@ -122,7 +114,6 @@ void bt_up()
        if(current_menu > 0)
         {
             current_menu--;
-
             lcd_is_clean = false;
         }
     } 
@@ -160,7 +151,6 @@ void bt_down()
         if(current_menu < NUM_SCREENS - 1)
         {
             current_menu++;
-
             lcd_is_clean = false;
         }
     }
@@ -222,7 +212,6 @@ void toggleLight()
         PORTB&=!(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, LOW);
     else
         PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH);
-
     lcd_is_clean = false;
 }
 
@@ -246,17 +235,17 @@ int checkButtonPress()
 
     int bt = -1;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
-        bt = (BT_SELECT);
+        bt = BT_SELECT;
     else if((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
-        bt = (BT_LEFT);
+        bt = BT_LEFT;
     else if((bt_analog_value < UP_THRESHOLD) and (bt_analog_value >= DOWN_THRESHOLD))
-        bt = (BT_DOWN);
+        bt = BT_DOWN;
     else if((bt_analog_value < DOWN_THRESHOLD) and (bt_analog_value >= RIGHT_THRESHOLD))
-        bt = (BT_UP);
+        bt = BT_UP;
     else if(bt_analog_value < RIGHT_THRESHOLD)
-        bt = (BT_RIGHT);
-    else 
-        bt = (BT_NONE);
+        bt = BT_RIGHT;
+    else
+        bt = BT_NONE;
 
     return bt;
 }
