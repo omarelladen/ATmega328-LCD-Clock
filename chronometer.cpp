@@ -14,7 +14,7 @@ Chronometer::~Chronometer()
 {
 }
 
-void Chronometer::mv_cur_up(int* pos_cursor)
+void Chronometer::curUp(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -60,12 +60,12 @@ void Chronometer::mv_cur_up(int* pos_cursor)
         break;
     }
 }
-void Chronometer::mv_cur_down(int* pos_cursor)
+void Chronometer::curDown(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
     case 8:
-        if(this->hour <= 10)
+        if(this->hour < 10)
             this->hour += 90;
         else
             this->hour -= 10;
@@ -105,11 +105,6 @@ void Chronometer::mv_cur_down(int* pos_cursor)
     default:
         break;
     }
-}
-
-void Chronometer::pause()
-{
-    this->is_running=false;
 }
 
 void Chronometer::toggle()

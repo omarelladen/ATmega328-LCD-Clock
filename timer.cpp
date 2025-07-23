@@ -14,7 +14,7 @@ Timer::~Timer()
 {
 }
 
-void Timer::mv_cur_up(int* pos_cursor)
+void Timer::curUp(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -60,12 +60,12 @@ void Timer::mv_cur_up(int* pos_cursor)
         break;
     }
 }
-void Timer::mv_cur_down(int* pos_cursor)
+void Timer::curDown(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
     case 8:
-        if(this->hour <= 10)
+        if(this->hour < 10)
             this->hour += 90;
         else
             this->hour -= 10;
@@ -105,12 +105,6 @@ void Timer::mv_cur_down(int* pos_cursor)
     default:
         break;
     }
-}
-
-
-void Timer::pause()
-{
-    this->is_running=false;
 }
 
 void Timer::toggle()

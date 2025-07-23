@@ -17,16 +17,14 @@ class Date {
     public:
         Date();
         ~Date();
-        void mv_cur_up_date(int* pos_cursor);
-        void mv_cur_down_date(int* pos_cursor);
-        void mv_cur_up_time(int* pos_cursor);
-        void mv_cur_down_time(int* pos_cursor);
-        void pause();
-        void toggle();
+        void curUpDate(int* pos_cursor);
+        void curDownDate(int* pos_cursor);
+        void curUpTime(int* pos_cursor);
+        void curDownTime(int* pos_cursor);
         void secondCount();
         void print(LiquidCrystal* lcd) const;
-        void print_date(LiquidCrystal* lcd) const;
-        void print_time(LiquidCrystal* lcd) const;
+        void printDate(LiquidCrystal* lcd) const;
+        void printTime(LiquidCrystal* lcd) const;
         void update();
         void execute();
 };
