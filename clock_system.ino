@@ -17,6 +17,9 @@ void setup()
     DDRB|=(1<<DDB2); // pinMode(PIN_BACK_LIGHT, OUTPUT);
     PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH); // 
 
+    pinMode(13, OUTPUT);
+    digitalWrite(13, LOW);
+
     lcd.begin(16, 2);
 
     Serial.begin(9600);

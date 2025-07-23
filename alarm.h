@@ -8,6 +8,7 @@ class Alarm {
         int n_repet;
         int interval_min_repet;
         bool is_active;
+        bool is_alarm_on;
         Date* date;
 
     public:
@@ -16,6 +17,6 @@ class Alarm {
         void curUp(int* pos_cursor);
         void curDown(int* pos_cursor);
         void print(LiquidCrystal* lcd) const;
-        void update();
+        void alert();
         void execute();
 };
