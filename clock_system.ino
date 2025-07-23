@@ -31,7 +31,7 @@ void clearScreen()
     lcd_is_clean = true;
 }
 
-void left()
+void bt_left()
 {
     if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
     {    
@@ -47,7 +47,7 @@ void left()
     lcd_is_clean = false;
 }
 
-void right()
+void bt_right()
 {
     if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
     {    
@@ -63,7 +63,7 @@ void right()
     lcd_is_clean = false;
 }
 
-void up()
+void bt_up()
 {
     if(pos_cursor == 7)
     {
@@ -99,7 +99,7 @@ void up()
     }
 }
 
-void down()
+void bt_down()
 {
     if(pos_cursor == 7)
     {
@@ -135,7 +135,7 @@ void down()
     }
 }
 
-void select()
+void bt_select()
 {
     // Selection action for each menu
     switch(current_menu)
@@ -175,15 +175,15 @@ void toggleLight()
 void botaoSolto(int bt)
 {
     if (bt == BT_DOWN)
-        down();
+        bt_down();
     else if(bt == BT_UP)
-        up();
+        bt_up();
     else if (bt == BT_SELECT)
-        select();
+        bt_select();
     else if(bt == BT_LEFT)
-        left();
+        bt_left();
     else if(bt == BT_RIGHT)
-        right();
+        bt_right();
 }
 
 int checkButtonPress()
