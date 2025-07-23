@@ -49,5 +49,5 @@
 #define MAX_STACK_SIZE 7
 
 
-#define NUM_SCREENS 7
+#define NUM_SCREENS 6
 

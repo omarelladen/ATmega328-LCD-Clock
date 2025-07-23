@@ -176,7 +176,7 @@ void Date::mv_cur_down_time(int* pos_cursor)
     switch(*pos_cursor)
     {
     case 8:
-        if(this->hour <= 10)
+        if(this->hour < 10)
             this->hour += 20;
         else
             this->hour -= 10;
