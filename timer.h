@@ -15,11 +15,8 @@ class Timer {
         ~Timer();
         void mv_cur_up(uint8_t* pos_cursor);
         void mv_cur_down(uint8_t* pos_cursor);
-        void mv_cur_left(uint8_t* pos_cursor);
-        void mv_cur_right(uint8_t* pos_cursor);
         void pause();
         void toggle();
-        void reset();
         void secondCount();
         void print(LiquidCrystal* lcd) const;
         void update();

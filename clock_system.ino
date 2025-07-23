@@ -15,7 +15,7 @@ bool lcd_is_clean = false;
 Date date;
 Timer timer;
 Chronometer chrono;
-uint8_t current_menu = 0;
+uint8_t current_menu = 1;
 uint8_t pos_cursor = 7;
 
 void setup()
@@ -38,56 +38,32 @@ void clearScreen()
 
 void left()
 {
-    // Selection action for each menu
-    switch(current_menu)
-    {
-    case 0:
-        break;
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        chrono.reset();
-        break;
-    case 5:
-        timer.mv_cur_left(&pos_cursor);
-        break;
-    case 6:
-        break;
-    default:
-        break;
+    if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
+    {    
+        if(pos_cursor > 7)
+        {
+            if(pos_cursor == 11 || pos_cursor == 14)
+                pos_cursor -= 2;
+            else
+                pos_cursor--;
+        }
+
+        lcd_is_clean = false;
     }
 
-    
-
-    lcd_is_clean = false;
 }
 
 void right()
 {
-    // Right action for each menu
-    switch(current_menu)
-    {
-    case 0:
-        break;
-    case 1:
-        break;
-    case 2:
-        break;
-    case 3:
-        break;
-    case 4:
-        break;
-    case 5:
-        timer.mv_cur_right(&pos_cursor);
-        break;
-    case 6:
-        break;
-    default:
-        break;
+    if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
+    {    
+        if(pos_cursor < 15)
+        {
+            if(pos_cursor == 9 || pos_cursor == 12)
+                pos_cursor += 2;
+            else
+                pos_cursor++;
+        }
     }
 
     lcd_is_clean = false;
@@ -116,6 +92,7 @@ void up()
         case 3:
             break;
         case 4:
+            chrono.mv_cur_up(&pos_cursor);
             break;
         case 5:
             timer.mv_cur_up(&pos_cursor);
@@ -151,6 +128,7 @@ void down()
         case 3:
             break;
         case 4:
+            chrono.mv_cur_down(&pos_cursor);
             break;
         case 5:
             timer.mv_cur_down(&pos_cursor);
@@ -267,28 +245,25 @@ void loop()
     uint8_t bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
-    
-    lcd.setCursor(0, 1);
-    lcd.print(current_menu);
 
-    // Print for each menu
+    // Print each menu
     switch(current_menu)
     {
     case 0:
-        lcd.setCursor(0, 0);
+        lcd.setCursor(1, 0);
         if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
-            lcd.print(F("Light on"));        
+            lcd.print(F("Light       on"));        
         else
-            lcd.print(F("Light off"));
+            lcd.print(F("Light       off"));
         break;
     case 1:
         date.print(&lcd);
         break;
     case 2:
-        // date.edit_time(&lcd);
+        date.print_date(&lcd);
         break;
     case 3:
-        // date.edit_date(&lcd);
+        date.print_time(&lcd);
         break;
     case 4:
         chrono.print(&lcd);
@@ -298,7 +273,7 @@ void loop()
         break;
     case 6:
         break;
-        // alarm.exe(&lcd);
+        //alarm.print(&lcd);
     default:
         break;
     }
@@ -310,7 +285,14 @@ void loop()
     chrono.execute();
     timer.execute();
 
-    lcd.setCursor(pos_cursor, 1);
-    lcd.print(F("_"));
-    
+    if(pos_cursor == 7)
+    {
+        lcd.setCursor(0, 0);
+        lcd.print(F(">"));
+    }
+    else
+    {
+        lcd.setCursor(pos_cursor, 1);
+        lcd.print(F("-"));
+    }
 }

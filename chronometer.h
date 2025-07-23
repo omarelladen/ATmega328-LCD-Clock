@@ -14,9 +14,10 @@ class Chronometer {
     public:
         Chronometer();
         ~Chronometer();
+        void mv_cur_up(uint8_t* pos_cursor);
+        void mv_cur_down(uint8_t* pos_cursor);
         void pause();
         void toggle();
-        void reset();
         void secondCount();
         void print(LiquidCrystal* lcd) const;
         void update();
