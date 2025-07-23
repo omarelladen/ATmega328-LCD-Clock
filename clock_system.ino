@@ -18,6 +18,8 @@ void setup()
     PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH); // 
 
     lcd.begin(16, 2);
+
+    Serial.begin(9600);
 }
 
 
