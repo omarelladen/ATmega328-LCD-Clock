@@ -1,3 +1,11 @@
+//#include <avr/pgmspace.h>
+// #include <Arduino.h>
+#include <LiquidCrystal.h>
+#include "chronometer.h"
+#include "date.h"
+#include "timer.h"
+#include "alarm.h"
+
 // Pin
 #define PIN_BOTOES A0
 #define PIN_D4 4
@@ -39,3 +47,7 @@
 
 //Stack
 #define MAX_STACK_SIZE 7
+
+
+#define NUM_SCREENS 7
+
