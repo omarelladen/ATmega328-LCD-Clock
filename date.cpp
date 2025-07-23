@@ -19,17 +19,114 @@ Date::~Date()
 
 void Date::mv_cur_up_date(int* pos_cursor)
 {
+    switch(*pos_cursor)
+    {
+    case 8:
+        if(this->day >= 30)
+            this->day -= 30;
+        else if(this->day >= 22)
+            this->day -= 20;
+        else
+            this->day += 10;
+        break;
+    case 9:
+        if(this->day == 31)
+            this->day = 30;
+        else if(this->day % 10 == 9)
+            this->day -= 9;
+        else
+            this->day++;
+        break;
 
+    case 11:
+        if(this->month >= 3)
+            this->month -= 10;
+        else
+            this->month += 10;
+        break;
+    case 12:
+        if(this->month == 12)
+            this->month = 10;
+        else if(this->month % 10 == 9)
+            this->month -= 9;
+        else
+            this->month++;
+        break;
+
+    case 14:
+        if(this->year >= 90)
+            this->year -= 90;
+        else
+            this->year += 10;
+        break;
+    case 15:
+        if(this->year % 10 == 9)
+            this->year -= 9;
+        else
+            this->year++;
+        break;
+    default:
+        break;
+    }
 }
 void Date::mv_cur_down_date(int* pos_cursor)
 {
+    switch(*pos_cursor)
+    {
+    case 8:
+        if(this->day <= 10)
+            this->day += 20;
+        else
+            this->day -= 10;
+        break;
+    case 9:
+        if(this->day == 30)
+            this->day = 31;
+        else if(this->day % 10 == 0)
+            this->day += 9;
+        else
+            this->day--;
+        break;
 
+    case 11:
+        if(this->month <= 1)
+            this->month += 20;
+        else if(this->month < 10)
+            this->month += 20;
+        else
+            this->month -= 10;
+        break;
+    case 12:
+        if(this->month == 10)
+            this->month = 12;
+
+        else if(this->month % 10 == 0)
+            this->month += 9;
+        else
+            this->month--;
+        break;
+
+    case 14:
+        if(this->year < 10)
+            this->year += 90;
+        else
+            this->year -= 10;
+        break;
+    case 15:
+        if(this->year % 10 == 0)
+            this->year += 9;
+        else
+            this->year--;
+        break;
+    default:
+        break;
+    }
 }
 
 void Date::mv_cur_up_time(int* pos_cursor)
 {
     switch(*pos_cursor)
-    {/////////////////////////////////////////////////////////////// n pd passar de 03 e 13 mas n de 23
+    {
     case 8:
         if(this->hour >= 20)
             this->hour -= 20;
@@ -80,12 +177,12 @@ void Date::mv_cur_down_time(int* pos_cursor)
     {
     case 8:
         if(this->hour <= 10)
-            this->hour += 20; //////////////////////////
+            this->hour += 20;
         else
             this->hour -= 10;
         break;
     case 9:
-        if(this->hour == 20)
+        if(this->hour == 20) // 20 down => 23 
             this->hour = 23;
         else if(this->hour % 10 == 0)
             this->hour += 9;
@@ -164,7 +261,7 @@ void Date::secondCount()
         this->hour = 0;
         this->day++;
     }
-    if(this->day == 31)
+    if(this->day == 32)
     {
         this->day = 0;
         this->month++;
