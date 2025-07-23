@@ -48,6 +48,32 @@ void Alarm::mv_cur_up(int* pos_cursor)
             this->minute_start++;
         break;
 
+    case 9:
+        if(this->n_repet >= 90)
+            this->n_repet -= 90;
+        else
+            this->n_repet += 10;
+        break;
+    case 10:
+        if(this->n_repet % 10 == 9)
+            this->n_repet -= 9;
+        else
+            this->n_repet++;
+        break;
+
+    case 13:
+        if(this->interval_min_repet >= 90)
+            this->interval_min_repet -= 90;
+        else
+            this->interval_min_repet += 10;
+        break;
+    case 14:
+        if(this->interval_min_repet % 10 == 9)
+            this->interval_min_repet -= 9;
+        else
+            this->interval_min_repet++;
+        break;
+
     default:
         break;
     }
@@ -88,6 +114,32 @@ void Alarm::mv_cur_down(int* pos_cursor)
             this->minute_start += 9;
         else
             this->minute_start--;
+        break;
+    
+        case 9:
+        if(this->n_repet < 10)
+            this->n_repet += 90;
+        else
+            this->n_repet -= 10;
+        break;
+    case 10:
+        if(this->n_repet % 10 == 0)
+            this->n_repet += 9;
+        else
+            this->n_repet--;
+        break;
+
+    case 13:
+        if(this->interval_min_repet < 10)
+            this->interval_min_repet += 90;
+        else
+            this->interval_min_repet -= 10;
+        break;
+    case 14:
+        if(this->interval_min_repet % 10 == 0)
+            this->interval_min_repet += 9;
+        else
+            this->interval_min_repet--;
         break;
 
     default:
