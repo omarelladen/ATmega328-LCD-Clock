@@ -145,6 +145,7 @@ void bt_up()
             timer.mv_cur_up(&pos_cursor);
             break;
         case 5:
+            alarm.mv_cur_up(&pos_cursor);
             break;
         default:
             break;
@@ -182,6 +183,7 @@ void bt_down()
             timer.mv_cur_down(&pos_cursor);
             break;
         case 5:
+            alarm.mv_cur_down(&pos_cursor);
             break;
         default:
             break;
