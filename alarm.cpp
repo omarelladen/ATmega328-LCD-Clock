@@ -15,96 +15,84 @@ Alarm::~Alarm()
 
 void Alarm::mv_cur_up(int* pos_cursor)
 {
-    // switch(*pos_cursor)
-    // {
-    // case 8:
-    //     if(this->hour >= 90)
-    //         this->hour -= 90;
-    //     else
-    //         this->hour += 10;
-    //     break;
-    // case 9:
-    //     if(this->hour % 10 == 9)
-    //         this->hour -= 9;
-    //     else
-    //         this->hour++;
-    //     break;
+    switch(*pos_cursor)
+    {
+    case 3:
+        if(this->hour_start >= 20)
+            this->hour_start -= 20;
+        else if(this->hour_start > 13)
+            this->hour_start -= 10;
+        else
+            this->hour_start += 10;
+        break;
+        break;
+    case 4:
+        if(this->hour_start == 23)
+            this->hour_start = 20;
+        else if(this->hour_start % 10 == 9)
+            this->hour_start -= 9;
+        else
+            this->hour_start++;
+        break;
 
-    // case 11:
-    //     if(this->minute >= 50)
-    //         this->minute -= 50;
-    //     else
-    //         this->minute += 10;
-    //     break;
-    // case 12:
-    //     if(this->minute % 10 == 9)
-    //         this->minute -= 9;
-    //     else
-    //         this->minute++;
-    //     break;
+    case 6:
+        if(this->minute_start >= 50)
+            this->minute_start -= 50;
+        else
+            this->minute_start += 10;
+        break;
+    case 7:
+        if(this->minute_start % 10 == 9)
+            this->minute_start -= 9;
+        else
+            this->minute_start++;
+        break;
 
-    // case 14:
-    //     if(this->second >= 50)
-    //         this->second -= 50;
-    //     else
-    //         this->second += 10;
-    //     break;
-    // case 15:
-    //     if(this->second % 10 == 9)
-    //         this->second -= 9;
-    //     else
-    //         this->second++;
-    //     break;
-    // default:
-    //     break;
-    // }
+    default:
+        break;
+    }
 }
 
 void Alarm::mv_cur_down(int* pos_cursor)
 {
-    // switch(*pos_cursor)
-    // {
-    // case 8:
-    //     if(this->hour <= 10)
-    //         this->hour += 90;
-    //     else
-    //         this->hour -= 10;
-    //     break;
-    // case 9:
-    //     if(this->hour % 10 == 0)
-    //         this->hour += 9;
-    //     else
-    //         this->hour--;
-    //     break;
+    switch(*pos_cursor)
+    {
+    case 3:
+        if(this->hour_start < 10)
+        {
+            if(this->hour_start >= 4)
+                this->hour_start += 10;
+            else
+                this->hour_start += 20;
+        }
+        else
+            this->hour_start -= 10;
+        break;
+    case 4:
+        if(this->hour_start == 20) // 20 down => 23 
+            this->hour_start = 23;
+        else if(this->hour_start % 10 == 0)
+            this->hour_start += 9;
+        else
+            this->hour_start--;
+        break;
 
-    // case 11:
-    //     if(this->minute < 10)
-    //         this->minute += 50;
-    //     else
-    //         this->minute -= 10;
-    //     break;
-    // case 12:
-    //     if(this->minute % 10 == 0)
-    //         this->minute += 9;
-    //     else
-    //         this->minute--;
-    //     break;
+    case 6:
+        if(this->minute_start < 10)
+            this->minute_start += 50;
+        else
+            this->minute_start -= 10;
+        break;
+    case 7:
+        if(this->minute_start % 10 == 0)
+            this->minute_start += 9;
+        else
+            this->minute_start--;
+        break;
 
-    // case 14:
-    //     if(this->second < 10)
-    //         this->second += 50;
-    //     else
-    //         this->second -= 10;
-    //     break;
-    // case 15:
-    //     if(this->second % 10 == 0)
-    //         this->second += 9;
-    //     else
-    //         this->second--;
-    //     break;
-    // default:
-    //     break;
-    // }
+    default:
+        break;
+    }
 }
 
 void Alarm::toggle()

@@ -130,6 +130,8 @@ void Date::mv_cur_up_time(int* pos_cursor)
     case 8:
         if(this->hour >= 20)
             this->hour -= 20;
+        else if(this->hour > 13)
+            this->hour -= 10;
         else
             this->hour += 10;
         break;
@@ -177,7 +179,12 @@ void Date::mv_cur_down_time(int* pos_cursor)
     {
     case 8:
         if(this->hour < 10)
-            this->hour += 20;
+        {
+            if(this->hour >= 4)
+                this->hour += 10;
+            else
+                this->hour += 20;
+        }
         else
             this->hour -= 10;
         break;
