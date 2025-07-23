@@ -2,7 +2,7 @@
 
 Timer::Timer():
 second(0),
-minute(30),
+minute(0),
 hour(0),
 previous_millis(millis()),
 current_millis(0),

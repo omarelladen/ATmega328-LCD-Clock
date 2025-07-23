@@ -1,12 +1,12 @@
 #include "date.h"
 
 Date::Date():
-day(22),
-month(7),
-year(25),
+day(0),
+month(0),
+year(0),
 second(0),
-minute(5),
-hour(22),
+minute(0),
+hour(0),
 previous_millis(millis()),
 current_millis(0),
 is_running(true)
@@ -15,6 +15,112 @@ is_running(true)
 
 Date::~Date()
 {
+}
+
+void Date::mv_cur_up_date(int* pos_cursor)
+{
+
+}
+void Date::mv_cur_down_date(int* pos_cursor)
+{
+
+}
+
+void Date::mv_cur_up_time(int* pos_cursor)
+{
+    switch(*pos_cursor)
+    {/////////////////////////////////////////////////////////////// n pd passar de 03 e 13 mas n de 23
+    case 8:
+        if(this->hour >= 20)
+            this->hour -= 20;
+        else
+            this->hour += 10;
+        break;
+    case 9:
+        if(this->hour == 23)
+            this->hour = 20;
+        else if(this->hour % 10 == 9)
+            this->hour -= 9;
+        else
+            this->hour++;
+        break;
+
+    case 11:
+        if(this->minute >= 50)
+            this->minute -= 50;
+        else
+            this->minute += 10;
+        break;
+    case 12:
+        if(this->minute % 10 == 9)
+            this->minute -= 9;
+        else
+            this->minute++;
+        break;
+
+    case 14:
+        if(this->second >= 50)
+            this->second -= 50;
+        else
+            this->second += 10;
+        break;
+    case 15:
+        if(this->second % 10 == 9)
+            this->second -= 9;
+        else
+            this->second++;
+        break;
+    default:
+        break;
+    }
+}
+void Date::mv_cur_down_time(int* pos_cursor)
+{
+    switch(*pos_cursor)
+    {
+    case 8:
+        if(this->hour <= 10)
+            this->hour += 20; //////////////////////////
+        else
+            this->hour -= 10;
+        break;
+    case 9:
+        if(this->hour == 20)
+            this->hour = 23;
+        else if(this->hour % 10 == 0)
+            this->hour += 9;
+        else
+            this->hour--;
+        break;
+
+    case 11:
+        if(this->minute < 10)
+            this->minute += 50;
+        else
+            this->minute -= 10;
+        break;
+    case 12:
+        if(this->minute % 10 == 0)
+            this->minute += 9;
+        else
+            this->minute--;
+        break;
+
+    case 14:
+        if(this->second < 10)
+            this->second += 50;
+        else
+            this->second -= 10;
+        break;
+    case 15:
+        if(this->second % 10 == 0)
+            this->second += 9;
+        else
+            this->second--;
+        break;
+    default:
+        break;
+    }
 }
 
 void Date::pause()
