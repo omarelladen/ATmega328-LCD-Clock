@@ -215,7 +215,16 @@ void Alarm::update()
 
 void Alarm::execute()
 {
-    if(this->hour_start == date->getHour() && this->minute_start == date->getMinute())
+    for(int i=0; i < this->n_repet; i++)
     {
+        int hour_to_check = this->hour_start + i * interval_min_repet / 60;
+        int minute_to_check = this->minute_start + i * interval_min_repet % 60;
+
+
+        if(hour_to_check == date->getHour() && minute_to_check == date->getMinute())
+        {
+            Serial.println(F("Alarme!"));
+        }
     }
+
 }
