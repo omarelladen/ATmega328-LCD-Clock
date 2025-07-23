@@ -10,7 +10,7 @@ Date date;
 Timer timer;
 Chronometer chrono;
 Alarm alarm;
-int current_menu = 1;
+int current_menu = 0;
 int pos_cursor = 7;
 
 void setup()
@@ -33,7 +33,7 @@ void clearScreen()
 
 void bt_left()
 {
-    if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
+    if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
     {    
         if(pos_cursor > 7)
         {
@@ -49,7 +49,7 @@ void bt_left()
 
 void bt_right()
 {
-    if(current_menu == 2 || current_menu == 3 || current_menu == 4 || current_menu == 5)
+    if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
     {    
         if(pos_cursor < 15)
         {
@@ -80,20 +80,18 @@ void bt_up()
         case 0:
             break;
         case 1:
-            break;
-        case 2:
             date.mv_cur_up_date(&pos_cursor);
             break;
-        case 3:
+        case 2:
             date.mv_cur_up_time(&pos_cursor);
             break;
-        case 4:
+        case 3:
             chrono.mv_cur_up(&pos_cursor);
             break;
-        case 5:
+        case 4:
             timer.mv_cur_up(&pos_cursor);
             break;
-        case 6:
+        case 5:
             break;
         default:
             break;
@@ -118,20 +116,18 @@ void bt_down()
         case 0:
             break;
         case 1:
-            break;
-        case 2:
             date.mv_cur_down_date(&pos_cursor);
             break;
-        case 3:
+        case 2:
             date.mv_cur_down_time(&pos_cursor);
             break;
-        case 4:
+        case 3:
             chrono.mv_cur_down(&pos_cursor);
             break;
-        case 5:
+        case 4:
             timer.mv_cur_down(&pos_cursor);
             break;
-        case 6:
+        case 5:
             break;
         default:
             break;
@@ -152,14 +148,12 @@ void bt_select()
     case 2:
         break;
     case 3:
-        break;
-    case 4:
         chrono.toggle();
         break;
-    case 5:
+    case 4:
         timer.toggle();
         break;
-    case 6:
+    case 5:
         break;
     default:
         break;
@@ -238,27 +232,28 @@ void loop()
     {
     case 0:
         lcd.setCursor(1, 0);
+        lcd.print(F("Light"));
+        lcd.setCursor(1, 1);
         if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
-            lcd.print(F("Light       on"));        
+            lcd.print(F("on"));        
         else
-            lcd.print(F("Light       off"));
-        break;
-    case 1:
+            lcd.print(F("off"));
+
         date.print(&lcd);
         break;
-    case 2:
+    case 1:
         date.print_date(&lcd);
         break;
-    case 3:
+    case 2:
         date.print_time(&lcd);
         break;
-    case 4:
+    case 3:
         chrono.print(&lcd);
         break;
-    case 5:
+    case 4:
         timer.print(&lcd);
         break;
-    case 6:
+    case 5:
         alarm.print(&lcd);
         break;
     default:
