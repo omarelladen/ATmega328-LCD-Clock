@@ -141,7 +141,7 @@ void Timer::secondCount()
 
 void Timer::print(LiquidCrystal* lcd) const
 {
-    lcd->setCursor(1, 0);
+    lcd->setCursor(0, 0);
     lcd->print(F("Timer"));
 
     if(this->hour >= 10)

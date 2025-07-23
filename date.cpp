@@ -359,7 +359,7 @@ void Date::print(LiquidCrystal* lcd) const
 
 void Date::print_date(LiquidCrystal* lcd) const
 {
-    lcd->setCursor(1, 0);
+    lcd->setCursor(0, 0);
     lcd->print(F("Date"));
 
         if(this->day >= 10)
@@ -403,7 +403,7 @@ void Date::print_date(LiquidCrystal* lcd) const
 
 void Date::print_time(LiquidCrystal* lcd) const
 {
-    lcd->setCursor(1, 0);
+    lcd->setCursor(0, 0);
     lcd->print(F("Time"));
 
         if(this->hour >= 10)
