@@ -13,9 +13,8 @@ class Timer {
     public:
         Timer();
         ~Timer();
-        void mv_cur_up(int* pos_cursor);
-        void mv_cur_down(int* pos_cursor);
-        void pause();
+        void curUp(int* pos_cursor);
+        void curDown(int* pos_cursor);
         void toggle();
         void secondCount();
         void print(LiquidCrystal* lcd) const;

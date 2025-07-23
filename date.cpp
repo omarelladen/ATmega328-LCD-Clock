@@ -17,7 +17,7 @@ Date::~Date()
 {
 }
 
-void Date::mv_cur_up_date(int* pos_cursor)
+void Date::curUpDate(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -39,9 +39,7 @@ void Date::mv_cur_up_date(int* pos_cursor)
         break;
 
     case 11:
-        if(this->month >= 3)
-            this->month -= 10;
-        else
+        if(this->month <= 2)
             this->month += 10;
         break;
     case 12:
@@ -69,7 +67,7 @@ void Date::mv_cur_up_date(int* pos_cursor)
         break;
     }
 }
-void Date::mv_cur_down_date(int* pos_cursor)
+void Date::curDownDate(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -125,7 +123,7 @@ void Date::mv_cur_down_date(int* pos_cursor)
     }
 }
 
-void Date::mv_cur_up_time(int* pos_cursor)
+void Date::curUpTime(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -175,7 +173,7 @@ void Date::mv_cur_up_time(int* pos_cursor)
         break;
     }
 }
-void Date::mv_cur_down_time(int* pos_cursor)
+void Date::curDownTime(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -226,22 +224,6 @@ void Date::mv_cur_down_time(int* pos_cursor)
         break;
     default:
         break;
-    }
-}
-
-void Date::pause()
-{
-    this->is_running=false;
-}
-
-void Date::toggle()
-{
-    if(is_running)
-        is_running = false;
-    else
-    {
-        this->is_running = true;
-        this->previous_millis = millis() - (this->current_millis - this->previous_millis);
     }
 }
 
@@ -360,7 +342,7 @@ void Date::print(LiquidCrystal* lcd) const
     lcd->print(F("/"));
 }
 
-void Date::print_date(LiquidCrystal* lcd) const
+void Date::printDate(LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Date"));
@@ -404,7 +386,7 @@ void Date::print_date(LiquidCrystal* lcd) const
     lcd->print(F("/"));
 }
 
-void Date::print_time(LiquidCrystal* lcd) const
+void Date::printTime(LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Time"));

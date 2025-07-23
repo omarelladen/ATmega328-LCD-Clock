@@ -1,27 +1,23 @@
 #include "clock_system.h"
 
-
-
 LiquidCrystal lcd(PIN_RS,PIN_EN,PIN_D4,PIN_D5,PIN_D6,PIN_D7);
 int prev_bt_state = BT_NONE;
 unsigned long bt_delay = 0;
 bool lcd_is_clean = false;
+int current_menu = 0;
+int pos_cursor = 0;
 Date date;
 Timer timer;
 Chronometer chrono;
 Alarm alarm;
-int current_menu = 0;
-int pos_cursor = 0;
 
 void setup()
 {
-    // Luz
-    pinMode(PIN_BACK_LIGHT, OUTPUT); // DDRB|=(1<<DDB2);
-    digitalWrite(PIN_BACK_LIGHT, HIGH); // PORTB|=(1<<PB2);
+    // Light
+    DDRB|=(1<<DDB2); // pinMode(PIN_BACK_LIGHT, OUTPUT);
+    PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH); // 
 
     lcd.begin(16, 2);
-    
-    Serial.begin(9600);
 }
 
 
@@ -31,7 +27,7 @@ void clearScreen()
     lcd_is_clean = true;
 }
 
-void bt_left()
+void btLeft()
 {
     if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
     {    
@@ -69,7 +65,7 @@ void bt_left()
     }
 }
 
-void bt_right()
+void btRight()
 {
     if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
     {   
@@ -107,7 +103,7 @@ void bt_right()
     }
 }
 
-void bt_up()
+void btUp()
 {
     if(pos_cursor == 0)
     {
@@ -124,19 +120,19 @@ void bt_up()
         case 0:
             break;
         case 1:
-            date.mv_cur_up_date(&pos_cursor);
+            date.curUpDate(&pos_cursor);
             break;
         case 2:
-            date.mv_cur_up_time(&pos_cursor);
+            date.curUpTime(&pos_cursor);
             break;
         case 3:
-            chrono.mv_cur_up(&pos_cursor);
+            chrono.curUp(&pos_cursor);
             break;
         case 4:
-            timer.mv_cur_up(&pos_cursor);
+            timer.curUp(&pos_cursor);
             break;
         case 5:
-            alarm.mv_cur_up(&pos_cursor);
+            alarm.curUp(&pos_cursor);
             break;
         default:
             break;
@@ -144,7 +140,7 @@ void bt_up()
     }
 }
 
-void bt_down()
+void btDown()
 {
     if(pos_cursor == 0)
     {
@@ -161,19 +157,19 @@ void bt_down()
         case 0:
             break;
         case 1:
-            date.mv_cur_down_date(&pos_cursor);
+            date.curDownDate(&pos_cursor);
             break;
         case 2:
-            date.mv_cur_down_time(&pos_cursor);
+            date.curDownTime(&pos_cursor);
             break;
         case 3:
-            chrono.mv_cur_down(&pos_cursor);
+            chrono.curDown(&pos_cursor);
             break;
         case 4:
-            timer.mv_cur_down(&pos_cursor);
+            timer.curDown(&pos_cursor);
             break;
         case 5:
-            alarm.mv_cur_down(&pos_cursor);
+            alarm.curDown(&pos_cursor);
             break;
         default:
             break;
@@ -181,7 +177,7 @@ void bt_down()
     }
 }
 
-void bt_select()
+void btSelect()
 {
     // Selection action for each menu
     switch(current_menu)
@@ -218,15 +214,15 @@ void toggleLight()
 void botaoSolto(int bt)
 {
     if (bt == BT_DOWN)
-        bt_down();
+        btDown();
     else if(bt == BT_UP)
-        bt_up();
+        btUp();
     else if (bt == BT_SELECT)
-        bt_select();
+        btSelect();
     else if(bt == BT_LEFT)
-        bt_left();
+        btLeft();
     else if(bt == BT_RIGHT)
-        bt_right();
+        btRight();
 }
 
 int checkButtonPress()
@@ -268,11 +264,11 @@ void handleButtonPress(int bt)
 
 void loop()
 {
+    // Event Management
     int bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
-
-    // Print each menu
+    // Print current menu
     switch(current_menu)
     {
     case 0:
@@ -283,14 +279,13 @@ void loop()
             lcd.print(F("on"));        
         else
             lcd.print(F("off"));
-
         date.print(&lcd);
         break;
     case 1:
-        date.print_date(&lcd);
+        date.printDate(&lcd);
         break;
     case 2:
-        date.print_time(&lcd);
+        date.printTime(&lcd);
         break;
     case 3:
         chrono.print(&lcd);
@@ -301,17 +296,10 @@ void loop()
     case 5:
         alarm.print(&lcd);
         break;
+
     default:
         break;
     }
-
-    if(!lcd_is_clean)
-        clearScreen();
-    
-    date.execute();
-    chrono.execute();
-    timer.execute();
-
 
     // Print cursor
     if(pos_cursor != 0)
@@ -319,4 +307,13 @@ void loop()
         lcd.setCursor(pos_cursor, 1);
         lcd.print(F("-"));
     }
+
+    // Clear screen if needed
+    if(!lcd_is_clean)
+        clearScreen();
+    
+    // Executions on background
+    date.execute();
+    chrono.execute();
+    timer.execute();
 }

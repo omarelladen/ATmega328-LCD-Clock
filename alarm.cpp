@@ -13,7 +13,7 @@ Alarm::~Alarm()
 {
 }
 
-void Alarm::mv_cur_up(int* pos_cursor)
+void Alarm::curUp(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
@@ -79,7 +79,7 @@ void Alarm::mv_cur_up(int* pos_cursor)
     }
 }
 
-void Alarm::mv_cur_down(int* pos_cursor)
+void Alarm::curDown(int* pos_cursor)
 {
     switch(*pos_cursor)
     {
