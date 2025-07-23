@@ -74,7 +74,9 @@ void Date::mv_cur_down_date(int* pos_cursor)
     switch(*pos_cursor)
     {
     case 8:
-        if(this->day <= 10)
+        if(this->day <= 1)
+            this->day += 30;
+        else if(this->day < 10)
             this->day += 20;
         else
             this->day -= 10;
@@ -241,12 +243,6 @@ void Date::toggle()
         this->is_running = true;
         this->previous_millis = millis() - (this->current_millis - this->previous_millis);
     }
-}
-
-void Date::reset()
-{
-    this->second=this->minute=this->hour=0;
-    this->is_running=false;
 }
 
 void Date::secondCount()

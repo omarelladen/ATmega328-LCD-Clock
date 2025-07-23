@@ -147,17 +147,6 @@ void Alarm::mv_cur_down(int* pos_cursor)
     }
 }
 
-void Alarm::toggle()
-{
-    // if(is_running)
-    //     is_running = false;
-    // else
-    // {
-    //     this->is_running = true;
-    //     this->previous_millis = millis() - (this->current_millis - this->previous_millis);
-    // }
-}
-
 void Alarm::print(LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
