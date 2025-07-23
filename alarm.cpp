@@ -1,11 +1,12 @@
 #include "alarm.h"
 
-Alarm::Alarm():
+Alarm::Alarm(Date* date):
 minute_start(0),
 hour_start(0),
 n_repet(1),
 interval_min_repet(1),
-is_active(true)
+is_active(true),
+date(date)
 {
 }
 
@@ -214,11 +215,7 @@ void Alarm::update()
 
 void Alarm::execute()
 {
-    // if(this->hour == 0 && this->minute == 0 && this->second == 0)
-    // {
-    //     is_running = false;
-    // }
-
-    // if(this->is_running)
-    //     this->update();
+    if(this->hour_start == date->getHour() && this->minute_start == date->getMinute())
+    {
+    }
 }

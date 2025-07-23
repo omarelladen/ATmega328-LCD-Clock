@@ -17,6 +17,9 @@ Date::~Date()
 {
 }
 
+int Date::getHour() { return this->hour; }
+int Date::getMinute() { return this->minute; }
+
 void Date::curUpDate(int* pos_cursor)
 {
     switch(*pos_cursor)

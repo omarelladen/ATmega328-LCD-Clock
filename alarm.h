@@ -1,6 +1,5 @@
 #pragma once
-#include <Arduino.h>
-#include <LiquidCrystal.h>
+#include "date.h"
 
 class Alarm {
     private:
@@ -9,8 +8,10 @@ class Alarm {
         int n_repet;
         int interval_min_repet;
         bool is_active;
+        Date* date;
+
     public:
-        Alarm();
+        Alarm(Date* date);
         ~Alarm();
         void curUp(int* pos_cursor);
         void curDown(int* pos_cursor);
