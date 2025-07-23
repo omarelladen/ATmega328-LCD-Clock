@@ -140,7 +140,7 @@ void Chronometer::secondCount()
 
 void Chronometer::print(LiquidCrystal* lcd) const
 {
-    lcd->setCursor(1, 0);
+    lcd->setCursor(0, 0);
     lcd->print(F("Chrono"));
     if(this->hour >= 10)
         lcd->setCursor(8, 0);

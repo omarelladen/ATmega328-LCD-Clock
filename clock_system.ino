@@ -11,7 +11,7 @@ Timer timer;
 Chronometer chrono;
 Alarm alarm;
 int current_menu = 0;
-int pos_cursor = 7;
+int pos_cursor = 0;
 
 void setup()
 {
@@ -35,41 +35,94 @@ void bt_left()
 {
     if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
     {    
-        if(pos_cursor > 7)
+        if(pos_cursor == 8)
+        {
+            pos_cursor = 0;
+
+            lcd_is_clean = false;
+        }
+        else if(pos_cursor > 8)
         {
             if(pos_cursor == 11 || pos_cursor == 14)
                 pos_cursor -= 2;
             else
                 pos_cursor--;
+
+            lcd_is_clean = false;
         }
     }
+    else if(current_menu == 5)
+    {
+        if(pos_cursor == 3)
+        {
+            pos_cursor = 0;
 
-    lcd_is_clean = false;
+            lcd_is_clean = false;
+        }
+        else if(pos_cursor > 2)
+        {
+            if(pos_cursor == 6 || pos_cursor == 9)
+                pos_cursor -= 2;
+            else if(pos_cursor == 13)
+                pos_cursor -= 3;
+            else
+                pos_cursor--;
+
+            lcd_is_clean = false;
+        } 
+    }
 }
 
 void bt_right()
 {
     if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
-    {    
-        if(pos_cursor < 15)
+    {   
+        if(pos_cursor == 0)
+        {
+            pos_cursor = 8;
+
+            lcd_is_clean = false;
+        }
+        else if(pos_cursor < 15)
         {
             if(pos_cursor == 9 || pos_cursor == 12)
                 pos_cursor += 2;
             else
                 pos_cursor++;
+
+            lcd_is_clean = false;
         }
     }
+    else if(current_menu == 5)
+    {
+        if(pos_cursor == 0)
+        {
+            pos_cursor = 3;
 
-    lcd_is_clean = false;
+            lcd_is_clean = false;
+        }
+        else if(pos_cursor < 14)
+        {
+            if(pos_cursor == 4 || pos_cursor == 7)
+                pos_cursor += 2;
+            else if(pos_cursor == 10)
+                pos_cursor += 3;
+            else
+                pos_cursor++;
+
+            lcd_is_clean = false;
+        }
+    }
 }
 
 void bt_up()
 {
-    if(pos_cursor == 7)
+    if(pos_cursor == 0)
     {
        if(current_menu > 0)
         {
             current_menu--;
+
             lcd_is_clean = false;
         }
     } 
@@ -101,11 +154,12 @@ void bt_up()
 
 void bt_down()
 {
-    if(pos_cursor == 7)
+    if(pos_cursor == 0)
     {
         if(current_menu < NUM_SCREENS - 1)
         {
             current_menu++;
+
             lcd_is_clean = false;
         }
     }
@@ -231,9 +285,9 @@ void loop()
     switch(current_menu)
     {
     case 0:
-        lcd.setCursor(1, 0);
+        lcd.setCursor(0, 0);
         lcd.print(F("Light"));
-        lcd.setCursor(1, 1);
+        lcd.setCursor(0, 1);
         if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
             lcd.print(F("on"));        
         else
@@ -269,12 +323,7 @@ void loop()
 
 
     // Print cursor
-    if(pos_cursor == 7)
-    {
-        lcd.setCursor(0, 0);
-        lcd.print(F(">"));
-    }
-    else
+    if(pos_cursor != 0)
     {
         lcd.setCursor(pos_cursor, 1);
         lcd.print(F("-"));
