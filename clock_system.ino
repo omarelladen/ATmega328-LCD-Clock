@@ -9,7 +9,7 @@ int pos_cursor = 0;
 Date date;
 Timer timer;
 Chronometer chrono;
-Alarm alarm;
+Alarm alarm(&date);
 
 void setup()
 {
@@ -316,4 +316,5 @@ void loop()
     date.execute();
     chrono.execute();
     timer.execute();
+    alarm.execute();
 }

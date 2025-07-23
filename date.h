@@ -17,6 +17,8 @@ class Date {
     public:
         Date();
         ~Date();
+        int getHour();
+        int getMinute();
         void curUpDate(int* pos_cursor);
         void curDownDate(int* pos_cursor);
         void curUpTime(int* pos_cursor);
