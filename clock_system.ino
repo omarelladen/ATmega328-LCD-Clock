@@ -1,6 +1,6 @@
 #include "clock_system.h"
 
-LiquidCrystal lcd(PIN_RS,PIN_EN,PIN_D4,PIN_D5,PIN_D6,PIN_D7);
+LiquidCrystal lcd(PIN_RS_LCD, PIN_EN_LCD, PIN_D4_LCD, PIN_D5_LCD, PIN_D6_LCD, PIN_D7_LCD);
 int prev_bt_state = BT_NONE;
 unsigned long bt_delay = 0;
 bool lcd_is_clean = false;
@@ -13,9 +13,7 @@ Alarm alarm(&date);
 
 void setup()
 {
-    // Light
-    DDRB|=(1<<DDB2); // pinMode(PIN_BACK_LIGHT, OUTPUT);
-    PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH); // 
+    pinMode(PIN_BACK_LIGHT_LCD, INPUT);
 
     pinMode(13, OUTPUT);
     digitalWrite(13, LOW);
@@ -188,7 +186,6 @@ void btSelect()
     switch(current_menu)
     {
     case 0:
-        toggleLight();
         break;
     case 1:
         break;
@@ -207,15 +204,6 @@ void btSelect()
     }
 }
 
-void toggleLight()
-{
-    if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
-        PORTB&=!(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, LOW);
-    else
-        PORTB|=(1<<PB2); // digitalWrite(PIN_BACK_LIGHT, HIGH);
-    lcd_is_clean = false;
-}
-
 void botaoSolto(int bt)
 {
     if (bt == BT_DOWN)
@@ -232,7 +220,7 @@ void botaoSolto(int bt)
 
 int checkButtonPress()
 {
-    int16_t bt_analog_value = analogRead(PIN_BOTOES);
+    int16_t bt_analog_value = analogRead(PIN_BUTTONS);
 
     int bt = -1;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
@@ -277,13 +265,6 @@ void loop()
     switch(current_menu)
     {
     case 0:
-        lcd.setCursor(0, 0);
-        lcd.print(F("Light"));
-        lcd.setCursor(0, 1);
-        if(PORTB & (1 << PB2)) // PB2 = pino digital 10 (PIN_BACK_LIGHT)
-            lcd.print(F("on"));        
-        else
-            lcd.print(F("off"));
         date.print(&lcd);
         break;
     case 1:
