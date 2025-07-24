@@ -209,11 +209,6 @@ void Alarm::print(LiquidCrystal* lcd) const
     lcd->print(F("m"));
 }
 
-void Alarm::alert()
-{
-
-}
-
 void Alarm::execute()
 {
     int found = 0;
@@ -223,7 +218,7 @@ void Alarm::execute()
         int minute_to_check = this->minute_start + i * interval_min_repet % 60;
 
         if(hour_to_check == date->getHour() && minute_to_check == date->getMinute())
-        { 
+        {
             if(!this->is_alarm_on)
             {
                 digitalWrite(13, HIGH);
@@ -237,13 +232,8 @@ void Alarm::execute()
 
     if (!found && this->is_alarm_on) 
     {
-        // Depois de algum tempo ou evento, apaga o LED
-        digitalWrite(13, LOW);  // Apaga o LED
+        digitalWrite(13, LOW);
         Serial.println(F("OFF"));
-        this->is_alarm_on = false;  // Resetando o estado do alarme
+        this->is_alarm_on = false;
     }
-
-
-    if(this->is_alarm_on)
-        this->alert();
 }
