@@ -3,7 +3,7 @@
 Alarm::Alarm(Date* date):
 minute_start(0),
 hour_start(0),
-n_repet(1),
+n_repet(0),
 interval_min_repet(1),
 is_active(true),
 is_alarm_on(false),
