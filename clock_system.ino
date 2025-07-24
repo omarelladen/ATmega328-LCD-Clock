@@ -1,6 +1,6 @@
 #include "clock_system.h"
 
-LiquidCrystal lcd(PIN_RS_LCD, PIN_EN_LCD, PIN_D4_LCD, PIN_D5_LCD, PIN_D6_LCD, PIN_D7_LCD);
+LiquidCrystal lcd(PIN_LCD_RS, PIN_LCD_EN, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
 int prev_bt_state = BT_NONE;
 unsigned long bt_delay = 0;
 bool lcd_is_clean = false;
@@ -13,14 +13,12 @@ Alarm alarm(&date);
 
 void setup()
 {
-    pinMode(PIN_BACK_LIGHT_LCD, INPUT);
-
-    pinMode(13, OUTPUT);
-    digitalWrite(13, LOW);
+    pinMode(PIN_LCD_LIGHT, INPUT);
 
     lcd.begin(16, 2);
 
     Serial.begin(9600);
+    while (!Serial);
 }
 
 
@@ -220,7 +218,7 @@ void botaoSolto(int bt)
 
 int checkButtonPress()
 {
-    int16_t bt_analog_value = analogRead(PIN_BUTTONS);
+    int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
 
     int bt = -1;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
