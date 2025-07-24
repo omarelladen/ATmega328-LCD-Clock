@@ -221,7 +221,6 @@ void Alarm::execute()
         {
             if(!this->is_alarm_on)
             {
-                digitalWrite(13, HIGH);
                 Serial.println(F("ON"));
                 this->is_alarm_on = true;
             }
@@ -232,7 +231,6 @@ void Alarm::execute()
 
     if (!found && this->is_alarm_on) 
     {
-        digitalWrite(13, LOW);
         Serial.println(F("OFF"));
         this->is_alarm_on = false;
     }

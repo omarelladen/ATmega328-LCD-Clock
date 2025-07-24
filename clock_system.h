@@ -6,28 +6,32 @@
 #include "timer.h"
 #include "alarm.h"
 
-// Pins
-#define PIN_BUTTONS A0
-#define PIN_D4_LCD 4
-#define PIN_D5_LCD 5
-#define PIN_D6_LCD 6
-#define PIN_D7_LCD 7
-#define PIN_RS_LCD 8
-#define PIN_EN_LCD 9
-#define PIN_BACK_LIGHT_LCD 10
-#define PIN_D0 0
-#define PIN_D1 1
+
+// Serial pins
+#define PIN_TX 0
+#define PIN_RX 1
+
 #define PIN_D2 2
 #define PIN_D3 3
-#define PIN_D11 11
-#define PIN_D12 12
-#define PIN_D13 13
 
+// LCD Shield pins
+#define PIN_SHIELD_BTS A0
+#define PIN_LCD_D4 4
+#define PIN_LCD_D5 5
+#define PIN_LCD_D6 6
+#define PIN_LCD_D7 7
+#define PIN_LCD_RS 8
+#define PIN_LCD_EN 9
+#define PIN_LCD_LIGHT 10
 
+// SPI pins
+#define PIN_MOSI 11
+#define PIN_MISO 12
+#define PIN_CLK  13
 
 #define DEBOUNCE_TIME 50
 
-// Analog voltage for LCD shield buttons
+// Analog voltage in A0 for LCD Shield buttons
 #define SEL_THRESHOLD   800
 #define LEFT_THRESHOLD  600
 #define UP_THRESHOLD    400
@@ -35,7 +39,7 @@
 #define RIGHT_THRESHOLD  60
 
 // Buttons
-#define BT_NONE 0
+#define BT_NONE   0
 #define BT_SELECT 1
 #define BT_LEFT   2
 #define BT_UP     3
