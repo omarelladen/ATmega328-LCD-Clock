@@ -17,6 +17,5 @@ class Alarm {
         void curUp(int* pos_cursor);
         void curDown(int* pos_cursor);
         void print(LiquidCrystal* lcd) const;
-        void alert();
         void execute();
 };
