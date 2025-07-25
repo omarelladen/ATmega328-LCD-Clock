@@ -10,6 +10,7 @@ Date date;
 Timer timer;
 Chronometer chrono;
 Alarm alarm(&date);
+bool light_is_on = true;
 
 void setup()
 {
@@ -26,6 +27,21 @@ void clearScreen()
 {
     lcd.clear();
     lcd_is_clean = true;
+}
+
+void toggleLight()
+{
+    if(light_is_on)
+    {
+        pinMode(PIN_LCD_LIGHT, OUTPUT);
+        digitalWrite(PIN_LCD_LIGHT, LOW);
+        light_is_on = false;
+    }
+    else
+    {
+        pinMode(PIN_LCD_LIGHT, INPUT);
+        light_is_on = true;
+    }
 }
 
 void btLeft()
@@ -184,6 +200,7 @@ void btSelect()
     switch(current_menu)
     {
     case 0:
+        toggleLight();
         break;
     case 1:
         break;
