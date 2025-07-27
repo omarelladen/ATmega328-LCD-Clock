@@ -221,7 +221,7 @@ void Alarm::execute()
         {
             if(!this->is_alarm_on)
             {
-                Serial.println(F("ON"));
+                Serial.println(F("Alarm ON"));
                 this->is_alarm_on = true;
             }
             found = 1;
@@ -231,7 +231,7 @@ void Alarm::execute()
 
     if (!found && this->is_alarm_on) 
     {
-        Serial.println(F("OFF"));
+        Serial.println(F("Alarm OFF"));
         this->is_alarm_on = false;
     }
 }
