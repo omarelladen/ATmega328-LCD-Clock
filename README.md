@@ -1,6 +1,6 @@
 - Built with the Arduino framework
 
-Features:
+Features (no pin actions are implemented):
 - Date & time
 - Timer
 - Chronometer
