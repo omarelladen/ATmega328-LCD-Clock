@@ -1,6 +1,7 @@
 - Built with the Arduino framework
+- no pin actions are implemented other than the ones for the LCD
 
-Features (no pin actions are implemented):
+Features:
 - Date & time
 - Timer
 - Chronometer
