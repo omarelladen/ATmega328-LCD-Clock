@@ -44,6 +44,8 @@ void Date::curUpDate(int* pos_cursor)
     case 11:
         if(this->month <= 2)
             this->month += 10;
+        else if(this->month >= 10)
+            this->month -= 10;
         break;
     case 12:
         if(this->month == 12)
@@ -92,11 +94,9 @@ void Date::curDownDate(int* pos_cursor)
         break;
 
     case 11:
-        if(this->month <= 1)
-            this->month += 20;
-        else if(this->month < 10)
-            this->month += 20;
-        else
+        if(this->month <= 2)
+            this->month += 10;
+        else if(this->month >= 10)
             this->month -= 10;
         break;
     case 12:
