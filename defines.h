@@ -1,15 +1,6 @@
-//#include <avr/pgmspace.h>
-// #include <Arduino.h>
-#include <LiquidCrystal.h>
-#include "chronometer.h"
-#include "date.h"
-#include "timer.h"
-#include "alarm.h"
-
-
 // Serial pins
-#define PIN_TX 0
-#define PIN_RX 1
+#define PIN_D0 0
+#define PIN_D1 1
 
 #define PIN_D2 2
 #define PIN_D3 3
@@ -29,8 +20,6 @@
 #define PIN_MISO 12
 #define PIN_CLK  13
 
-#define DEBOUNCE_TIME 50
-
 // Analog voltage in A0 for LCD Shield buttons
 #define SEL_THRESHOLD   800
 #define LEFT_THRESHOLD  600
@@ -46,17 +35,6 @@
 #define BT_DOWN   4
 #define BT_RIGHT  5
 
+#define DEBOUNCE_TIME 50
+
 #define NUM_SCREENS 6
-
-
-void setup();
-void loop();
-void clearScreen();
-void btLeft();
-void btRight();
-void btUp();
-void btDown();
-void btSelect();
-void toggleLight();
-int checkButtonPress();
-void handleButtonPress(int bt);
