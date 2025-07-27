@@ -1,5 +1,5 @@
 - Built with the Arduino framework
-- no pin actions are implemented other than the ones for the LCD
+- No pin actions are implemented other than the ones for the LCD
 
 Features:
 - Date & time
