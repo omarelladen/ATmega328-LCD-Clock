@@ -8,18 +8,19 @@
 #include "alarm.h"
 
 
-
 LiquidCrystal lcd(PIN_LCD_RS, PIN_LCD_EN, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
-int prev_bt_state = BT_NONE;
-unsigned long bt_delay = 0;
-bool lcd_is_clean = false;
-int current_menu = 0;
-int pos_cursor = 0;
 Date date;
 Timer timer;
 Chronometer chrono;
 Alarm alarm(&date);
+
+bool lcd_is_clean = false;
 bool light_is_on = true;
+int current_menu = 0;
+int pos_cursor = 0;
+int prev_bt_state = BT_NONE;
+unsigned long bt_delay = 0;
+
 
 void setup()
 {
@@ -228,7 +229,7 @@ void btSelect()
     }
 }
 
-void botaoSolto(int bt)
+void btReleased(int bt)
 {
     if (bt == BT_DOWN)
         btDown();
@@ -265,13 +266,11 @@ int checkButtonPress()
 
 void handleButtonPress(int bt)
 {
-
-    //Quando o botao for apertado ou solto
     if((millis() - bt_delay) > DEBOUNCE_TIME)
     {
         if((bt == BT_NONE) and (prev_bt_state != BT_NONE) )
         {
-            botaoSolto(prev_bt_state);
+            btReleased(prev_bt_state);
             bt_delay = millis();
         }
     }
