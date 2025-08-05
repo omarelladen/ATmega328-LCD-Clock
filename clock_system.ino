@@ -9,17 +9,17 @@
 
 
 LiquidCrystal lcd(PIN_LCD_RS, PIN_LCD_EN, PIN_LCD_D4, PIN_LCD_D5, PIN_LCD_D6, PIN_LCD_D7);
-Date date;
-Timer timer;
-Chronometer chrono;
-Alarm alarm(&date);
+Date g_date;
+Timer g_timer;
+Chronometer g_chrono;
+Alarm g_alarm(&g_date);
 
-bool lcd_is_clean = false;
-bool light_is_on = true;
-int current_menu = 0;
-int pos_cursor = 0;
-int prev_bt_state = BT_NONE;
-unsigned long bt_delay = 0;
+bool g_lcd_is_clean = false;
+bool g_light_is_on = true;
+int g_current_menu = 0;
+int g_pos_cursor = 0;
+int g_prev_bt_state = BT_NONE;
+unsigned long g_bt_delay = 0;
 
 
 void setup()
@@ -36,130 +36,130 @@ void setup()
 void clearScreen()
 {
     lcd.clear();
-    lcd_is_clean = true;
+    g_lcd_is_clean = true;
 }
 
 void toggleLight()
 {
-    if(light_is_on)
+    if(g_light_is_on)
     {
         pinMode(PIN_LCD_LIGHT, OUTPUT);
         digitalWrite(PIN_LCD_LIGHT, LOW);
-        light_is_on = false;
+        g_light_is_on = false;
     }
     else
     {
         pinMode(PIN_LCD_LIGHT, INPUT);
-        light_is_on = true;
+        g_light_is_on = true;
     }
 }
 
 void btLeft()
 {
-    if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
+    if(g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
     {    
-        if(pos_cursor == 8)
+        if(g_pos_cursor == 8)
         {
-            pos_cursor = 0;
-            lcd_is_clean = false;
+            g_pos_cursor = 0;
+            g_lcd_is_clean = false;
         }
-        else if(pos_cursor > 8)
+        else if(g_pos_cursor > 8)
         {
-            if(pos_cursor == 11 || pos_cursor == 14)
-                pos_cursor -= 2;
+            if(g_pos_cursor == 11 || g_pos_cursor == 14)
+                g_pos_cursor -= 2;
             else
-                pos_cursor--;
-            lcd_is_clean = false;
+                g_pos_cursor--;
+            g_lcd_is_clean = false;
         }
     }
-    else if(current_menu == 5)
+    else if(g_current_menu == 5)
     {
-        if(pos_cursor == 3)
+        if(g_pos_cursor == 3)
         {
-            pos_cursor = 0;
-            lcd_is_clean = false;
+            g_pos_cursor = 0;
+            g_lcd_is_clean = false;
         }
-        else if(pos_cursor > 2)
+        else if(g_pos_cursor > 2)
         {
-            if(pos_cursor == 6 || pos_cursor == 9)
-                pos_cursor -= 2;
-            else if(pos_cursor == 13)
-                pos_cursor -= 3;
+            if(g_pos_cursor == 6 || g_pos_cursor == 9)
+                g_pos_cursor -= 2;
+            else if(g_pos_cursor == 13)
+                g_pos_cursor -= 3;
             else
-                pos_cursor--;
-            lcd_is_clean = false;
+                g_pos_cursor--;
+            g_lcd_is_clean = false;
         } 
     }
 }
 
 void btRight()
 {
-    if(current_menu == 1 || current_menu == 2 || current_menu == 3 || current_menu == 4)
+    if(g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
     {   
-        if(pos_cursor == 0)
+        if(g_pos_cursor == 0)
         {
-            pos_cursor = 8;
-            lcd_is_clean = false;
+            g_pos_cursor = 8;
+            g_lcd_is_clean = false;
         }
-        else if(pos_cursor < 15)
+        else if(g_pos_cursor < 15)
         {
-            if(pos_cursor == 9 || pos_cursor == 12)
-                pos_cursor += 2;
+            if(g_pos_cursor == 9 || g_pos_cursor == 12)
+                g_pos_cursor += 2;
             else
-                pos_cursor++;
-            lcd_is_clean = false;
+                g_pos_cursor++;
+            g_lcd_is_clean = false;
         }
     }
-    else if(current_menu == 5)
+    else if(g_current_menu == 5)
     {
-        if(pos_cursor == 0)
+        if(g_pos_cursor == 0)
         {
-            pos_cursor = 3;
-            lcd_is_clean = false;
+            g_pos_cursor = 3;
+            g_lcd_is_clean = false;
         }
-        else if(pos_cursor < 14)
+        else if(g_pos_cursor < 14)
         {
-            if(pos_cursor == 4 || pos_cursor == 7)
-                pos_cursor += 2;
-            else if(pos_cursor == 10)
-                pos_cursor += 3;
+            if(g_pos_cursor == 4 || g_pos_cursor == 7)
+                g_pos_cursor += 2;
+            else if(g_pos_cursor == 10)
+                g_pos_cursor += 3;
             else
-                pos_cursor++;
-            lcd_is_clean = false;
+                g_pos_cursor++;
+            g_lcd_is_clean = false;
         }
     }
 }
 
 void btUp()
 {
-    if(pos_cursor == 0)
+    if(g_pos_cursor == 0)
     {
-       if(current_menu > 0)
+       if(g_current_menu > 0)
         {
-            current_menu--;
-            lcd_is_clean = false;
+            g_current_menu--;
+            g_lcd_is_clean = false;
         }
     } 
     else
     {
-        switch(current_menu)
+        switch(g_current_menu)
         {
         case 0:
             break;
         case 1:
-            date.curUpDate(&pos_cursor);
+            g_date.curUpDate(&g_pos_cursor);
             break;
         case 2:
-            date.curUpTime(&pos_cursor);
+            g_date.curUpTime(&g_pos_cursor);
             break;
         case 3:
-            chrono.curUp(&pos_cursor);
+            g_chrono.curUp(&g_pos_cursor);
             break;
         case 4:
-            timer.curUp(&pos_cursor);
+            g_timer.curUp(&g_pos_cursor);
             break;
         case 5:
-            alarm.curUp(&pos_cursor);
+            g_alarm.curUp(&g_pos_cursor);
             break;
         default:
             break;
@@ -169,34 +169,34 @@ void btUp()
 
 void btDown()
 {
-    if(pos_cursor == 0)
+    if(g_pos_cursor == 0)
     {
-        if(current_menu < NUM_SCREENS - 1)
+        if(g_current_menu < NUM_SCREENS - 1)
         {
-            current_menu++;
-            lcd_is_clean = false;
+            g_current_menu++;
+            g_lcd_is_clean = false;
         }
     }
     else
     {
-        switch(current_menu)
+        switch(g_current_menu)
         {
         case 0:
             break;
         case 1:
-            date.curDownDate(&pos_cursor);
+            g_date.curDownDate(&g_pos_cursor);
             break;
         case 2:
-            date.curDownTime(&pos_cursor);
+            g_date.curDownTime(&g_pos_cursor);
             break;
         case 3:
-            chrono.curDown(&pos_cursor);
+            g_chrono.curDown(&g_pos_cursor);
             break;
         case 4:
-            timer.curDown(&pos_cursor);
+            g_timer.curDown(&g_pos_cursor);
             break;
         case 5:
-            alarm.curDown(&pos_cursor);
+            g_alarm.curDown(&g_pos_cursor);
             break;
         default:
             break;
@@ -207,7 +207,7 @@ void btDown()
 void btSelect()
 {
     // Selection action for each menu
-    switch(current_menu)
+    switch(g_current_menu)
     {
     case 0:
         toggleLight();
@@ -217,10 +217,10 @@ void btSelect()
     case 2:
         break;
     case 3:
-        chrono.toggle();
+        g_chrono.toggle();
         break;
     case 4:
-        timer.toggle();
+        g_timer.toggle();
         break;
     case 5:
         break;
@@ -245,9 +245,9 @@ void btReleased(int bt)
 
 int checkButtonPress()
 {
-    int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
+    int bt_analog_value = analogRead(PIN_SHIELD_BTS);
 
-    int bt = -1;
+    int bt;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
     else if((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
@@ -266,15 +266,15 @@ int checkButtonPress()
 
 void handleButtonPress(int bt)
 {
-    if((millis() - bt_delay) > DEBOUNCE_TIME)
+    if((millis() - g_bt_delay) > DEBOUNCE_TIME)
     {
-        if((bt == BT_NONE) and (prev_bt_state != BT_NONE) )
+        if((bt == BT_NONE) and (g_prev_bt_state != BT_NONE) )
         {
-            btReleased(prev_bt_state);
-            bt_delay = millis();
+            btReleased(g_prev_bt_state);
+            g_bt_delay = millis();
         }
     }
-    prev_bt_state = bt;
+    g_prev_bt_state = bt;
 }
 
 
@@ -285,25 +285,25 @@ void loop()
     handleButtonPress(bt_pressed);
     
     // Print current menu
-    switch(current_menu)
+    switch(g_current_menu)
     {
     case 0:
-        date.print(&lcd);
+        g_date.print(&lcd);
         break;
     case 1:
-        date.printDate(&lcd);
+        g_date.printDate(&lcd);
         break;
     case 2:
-        date.printTime(&lcd);
+        g_date.printTime(&lcd);
         break;
     case 3:
-        chrono.print(&lcd);
+        g_chrono.print(&lcd);
         break;
     case 4:
-        timer.print(&lcd);
+        g_timer.print(&lcd);
         break;
     case 5:
-        alarm.print(&lcd);
+        g_alarm.print(&lcd);
         break;
 
     default:
@@ -311,19 +311,19 @@ void loop()
     }
 
     // Print cursor
-    if(pos_cursor != 0)
+    if(g_pos_cursor != 0)
     {
-        lcd.setCursor(pos_cursor, 1);
+        lcd.setCursor(g_pos_cursor, 1);
         lcd.print(F("-"));
     }
 
     // Clear screen if needed
-    if(!lcd_is_clean)
+    if(!g_lcd_is_clean)
         clearScreen();
     
     // Executions on background
-    date.execute();
-    chrono.execute();
-    timer.execute();
-    alarm.execute();
+    g_date.execute();
+    g_chrono.execute();
+    g_timer.execute();
+    g_alarm.execute();
 }
