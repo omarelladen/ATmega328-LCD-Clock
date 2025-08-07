@@ -17,10 +17,10 @@ Date::~Date()
 {
 }
 
-int Date::getHour() { return this->hour; }
-int Date::getMinute() { return this->minute; }
+int8_t Date::getHour() { return this->hour; }
+int8_t Date::getMinute() { return this->minute; }
 
-void Date::curUpDate(int* pos_cursor)
+void Date::curUpDate(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -72,7 +72,7 @@ void Date::curUpDate(int* pos_cursor)
         break;
     }
 }
-void Date::curDownDate(int* pos_cursor)
+void Date::curDownDate(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -124,7 +124,7 @@ void Date::curDownDate(int* pos_cursor)
     }
 }
 
-void Date::curUpTime(int* pos_cursor)
+void Date::curUpTime(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -174,7 +174,7 @@ void Date::curUpTime(int* pos_cursor)
         break;
     }
 }
-void Date::curDownTime(int* pos_cursor)
+void Date::curDownTime(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {

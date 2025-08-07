@@ -3,10 +3,10 @@
 
 class Alarm {
     private:
-        int minute_start;
-        int hour_start;
-        int n_repet;
-        int interval_min_repet;
+        int8_t minute_start;
+        int8_t hour_start;
+        int8_t n_repet;
+        int8_t interval_min_repet;
         bool is_active;
         bool is_alarm_on;
         Date* date;
@@ -14,8 +14,8 @@ class Alarm {
     public:
         Alarm(Date* date);
         ~Alarm();
-        void curUp(int* pos_cursor);
-        void curDown(int* pos_cursor);
+        void curUp(int8_t* pos_cursor);
+        void curDown(int8_t* pos_cursor);
         void print(LiquidCrystal* lcd) const;
         void execute();
 };

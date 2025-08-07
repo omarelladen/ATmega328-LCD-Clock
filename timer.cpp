@@ -14,7 +14,7 @@ Timer::~Timer()
 {
 }
 
-void Timer::curUp(int* pos_cursor)
+void Timer::curUp(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -58,7 +58,7 @@ void Timer::curUp(int* pos_cursor)
         break;
     }
 }
-void Timer::curDown(int* pos_cursor)
+void Timer::curDown(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
