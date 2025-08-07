@@ -4,12 +4,12 @@
 
 class Date {
     private:
-        int day;
-        int month;
-        int year;
-        int second;
-        int minute;
-        int hour;
+        int8_t day;
+        int8_t month;
+        int8_t year;
+        int8_t second;
+        int8_t minute;
+        int8_t hour;
         unsigned long previous_millis;
         unsigned long current_millis;
         bool is_running;
@@ -17,12 +17,12 @@ class Date {
     public:
         Date();
         ~Date();
-        int getHour();
-        int getMinute();
-        void curUpDate(int* pos_cursor);
-        void curDownDate(int* pos_cursor);
-        void curUpTime(int* pos_cursor);
-        void curDownTime(int* pos_cursor);
+        int8_t getHour();
+        int8_t getMinute();
+        void curUpDate(int8_t* pos_cursor);
+        void curDownDate(int8_t* pos_cursor);
+        void curUpTime(int8_t* pos_cursor);
+        void curDownTime(int8_t* pos_cursor);
         void secondCount();
         void print(LiquidCrystal* lcd) const;
         void printDate(LiquidCrystal* lcd) const;

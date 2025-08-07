@@ -15,7 +15,7 @@ Alarm::~Alarm()
 {
 }
 
-void Alarm::curUp(int* pos_cursor)
+void Alarm::curUp(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -76,7 +76,7 @@ void Alarm::curUp(int* pos_cursor)
     }
 }
 
-void Alarm::curDown(int* pos_cursor)
+void Alarm::curDown(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {

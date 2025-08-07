@@ -16,9 +16,9 @@ Alarm g_alarm(&g_date);
 
 bool g_lcd_is_clean = false;
 bool g_light_is_on = true;
-int g_current_menu = 0;
-int g_pos_cursor = 0;
-int g_prev_bt_state = BT_NONE;
+int8_t g_current_menu = 0;
+int8_t g_pos_cursor = 0;
+int8_t g_prev_bt_state = BT_NONE;
 unsigned long g_bt_delay = 0;
 
 
@@ -30,6 +30,12 @@ void setup()
 
     Serial.begin(9600);
     while (!Serial);
+
+    Serial.print(F("int:"));
+    Serial.println(sizeof(int));
+    
+    Serial.print(F("bool:"));
+    Serial.println(sizeof(bool));
 }
 
 
@@ -229,7 +235,7 @@ void btSelect()
     }
 }
 
-void btReleased(int bt)
+void btReleased(int8_t bt)
 {
     if (bt == BT_DOWN)
         btDown();
@@ -243,11 +249,11 @@ void btReleased(int bt)
         btRight();
 }
 
-int checkButtonPress()
+int8_t checkButtonPress()
 {
-    int bt_analog_value = analogRead(PIN_SHIELD_BTS);
+    int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
 
-    int bt;
+    int8_t bt;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
     else if ((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
@@ -264,7 +270,7 @@ int checkButtonPress()
     return bt;
 }
 
-void handleButtonPress(int bt)
+void handleButtonPress(int8_t bt)
 {
     if ((millis() - g_bt_delay) > DEBOUNCE_TIME)
     {
@@ -281,7 +287,7 @@ void handleButtonPress(int bt)
 void loop()
 {
     // Event Management
-    int bt_pressed = checkButtonPress();
+    int8_t bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
     // Print current menu

@@ -14,7 +14,7 @@ Chronometer::~Chronometer()
 {
 }
 
-void Chronometer::curUp(int* pos_cursor)
+void Chronometer::curUp(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
@@ -58,7 +58,7 @@ void Chronometer::curUp(int* pos_cursor)
         break;
     }
 }
-void Chronometer::curDown(int* pos_cursor)
+void Chronometer::curDown(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
     {
