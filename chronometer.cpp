@@ -16,42 +16,40 @@ Chronometer::~Chronometer()
 
 void Chronometer::curUp(int* pos_cursor)
 {
-    switch(*pos_cursor)
+    switch (*pos_cursor)
     {
     case 8:
-        if(this->hour >= 90)
+        if (this->hour >= 90)
             this->hour -= 90;
         else
             this->hour += 10;
         break;
     case 9:
-        if(this->hour % 10 == 9)
+        if (this->hour % 10 == 9)
             this->hour -= 9;
         else
             this->hour++;
         break;
-
     case 11:
-        if(this->minute >= 50)
+        if (this->minute >= 50)
             this->minute -= 50;
         else
             this->minute += 10;
         break;
     case 12:
-        if(this->minute % 10 == 9)
+        if (this->minute % 10 == 9)
             this->minute -= 9;
         else
             this->minute++;
         break;
-
     case 14:
-        if(this->second >= 50)
+        if (this->second >= 50)
             this->second -= 50;
         else
             this->second += 10;
         break;
     case 15:
-        if(this->second % 10 == 9)
+        if (this->second % 10 == 9)
             this->second -= 9;
         else
             this->second++;
@@ -62,42 +60,40 @@ void Chronometer::curUp(int* pos_cursor)
 }
 void Chronometer::curDown(int* pos_cursor)
 {
-    switch(*pos_cursor)
+    switch (*pos_cursor)
     {
     case 8:
-        if(this->hour < 10)
+        if (this->hour < 10)
             this->hour += 90;
         else
             this->hour -= 10;
         break;
     case 9:
-        if(this->hour % 10 == 0)
+        if (this->hour % 10 == 0)
             this->hour += 9;
         else
             this->hour--;
         break;
-
     case 11:
-        if(this->minute < 10)
+        if (this->minute < 10)
             this->minute += 50;
         else
             this->minute -= 10;
         break;
     case 12:
-        if(this->minute % 10 == 0)
+        if (this->minute % 10 == 0)
             this->minute += 9;
         else
             this->minute--;
         break;
-
     case 14:
-        if(this->second < 10)
+        if (this->second < 10)
             this->second += 50;
         else
             this->second -= 10;
         break;
     case 15:
-        if(this->second % 10 == 0)
+        if (this->second % 10 == 0)
             this->second += 9;
         else
             this->second--;
@@ -109,7 +105,7 @@ void Chronometer::curDown(int* pos_cursor)
 
 void Chronometer::toggle()
 {
-    if(is_running)
+    if (is_running)
         is_running = false;
     else
     {
@@ -121,12 +117,12 @@ void Chronometer::toggle()
 void Chronometer::secondCount()
 {
     this->second++;
-    if(this->second == 60)
+    if (this->second == 60)
     {
         this->second = 0;
         this->minute++;
     }
-    if(this->minute == 60)
+    if (this->minute == 60)
     {
         this->minute = 0;
         this->hour++;
@@ -137,7 +133,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Chrono"));
-    if(this->hour >= 10)
+    if (this->hour >= 10)
         lcd->setCursor(8, 0);
     else
     {
@@ -148,7 +144,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
     }
     lcd->print(this->hour);
 
-    if(this->minute >= 10)
+    if (this->minute >= 10)
         lcd->setCursor(11, 0);
     else
     {
@@ -159,7 +155,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
     }
     lcd->print(this->minute);
 
-    if(this->second >= 10)
+    if (this->second >= 10)
         lcd->setCursor(14, 0);
     else
     {
@@ -179,7 +175,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
 void Chronometer::update()
 {
     this->current_millis = millis();
-    if(this->current_millis - this->previous_millis >= 1000)
+    if (this->current_millis - this->previous_millis >= 1000)
     {
         this->previous_millis = this->current_millis;
         this->secondCount();
@@ -188,12 +184,12 @@ void Chronometer::update()
 
 void Chronometer::execute()
 {
-    if(this->hour >= 100)
+    if (this->hour >= 100)
     {
         is_running = false;
         this->hour = 0; // restart
     }
 
-    if(this->is_running)
+    if (this->is_running)
         this->update();
 }
