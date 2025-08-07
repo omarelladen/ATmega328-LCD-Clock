@@ -41,7 +41,7 @@ void clearScreen()
 
 void toggleLight()
 {
-    if(g_light_is_on)
+    if (g_light_is_on)
     {
         pinMode(PIN_LCD_LIGHT, OUTPUT);
         digitalWrite(PIN_LCD_LIGHT, LOW);
@@ -56,34 +56,34 @@ void toggleLight()
 
 void btLeft()
 {
-    if(g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
+    if (g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
     {    
-        if(g_pos_cursor == 8)
+        if (g_pos_cursor == 8)
         {
             g_pos_cursor = 0;
             g_lcd_is_clean = false;
         }
-        else if(g_pos_cursor > 8)
+        else if (g_pos_cursor > 8)
         {
-            if(g_pos_cursor == 11 || g_pos_cursor == 14)
+            if (g_pos_cursor == 11 || g_pos_cursor == 14)
                 g_pos_cursor -= 2;
             else
                 g_pos_cursor--;
             g_lcd_is_clean = false;
         }
     }
-    else if(g_current_menu == 5)
+    else if (g_current_menu == 5)
     {
-        if(g_pos_cursor == 3)
+        if (g_pos_cursor == 3)
         {
             g_pos_cursor = 0;
             g_lcd_is_clean = false;
         }
-        else if(g_pos_cursor > 2)
+        else if (g_pos_cursor > 2)
         {
-            if(g_pos_cursor == 6 || g_pos_cursor == 9)
+            if (g_pos_cursor == 6 || g_pos_cursor == 9)
                 g_pos_cursor -= 2;
-            else if(g_pos_cursor == 13)
+            else if (g_pos_cursor == 13)
                 g_pos_cursor -= 3;
             else
                 g_pos_cursor--;
@@ -94,34 +94,34 @@ void btLeft()
 
 void btRight()
 {
-    if(g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
+    if (g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
     {   
-        if(g_pos_cursor == 0)
+        if (g_pos_cursor == 0)
         {
             g_pos_cursor = 8;
             g_lcd_is_clean = false;
         }
-        else if(g_pos_cursor < 15)
+        else if (g_pos_cursor < 15)
         {
-            if(g_pos_cursor == 9 || g_pos_cursor == 12)
+            if (g_pos_cursor == 9 || g_pos_cursor == 12)
                 g_pos_cursor += 2;
             else
                 g_pos_cursor++;
             g_lcd_is_clean = false;
         }
     }
-    else if(g_current_menu == 5)
+    else if (g_current_menu == 5)
     {
-        if(g_pos_cursor == 0)
+        if (g_pos_cursor == 0)
         {
             g_pos_cursor = 3;
             g_lcd_is_clean = false;
         }
-        else if(g_pos_cursor < 14)
+        else if (g_pos_cursor < 14)
         {
-            if(g_pos_cursor == 4 || g_pos_cursor == 7)
+            if (g_pos_cursor == 4 || g_pos_cursor == 7)
                 g_pos_cursor += 2;
-            else if(g_pos_cursor == 10)
+            else if (g_pos_cursor == 10)
                 g_pos_cursor += 3;
             else
                 g_pos_cursor++;
@@ -132,9 +132,9 @@ void btRight()
 
 void btUp()
 {
-    if(g_pos_cursor == 0)
+    if (g_pos_cursor == 0)
     {
-       if(g_current_menu > 0)
+       if (g_current_menu > 0)
         {
             g_current_menu--;
             g_lcd_is_clean = false;
@@ -142,7 +142,7 @@ void btUp()
     } 
     else
     {
-        switch(g_current_menu)
+        switch (g_current_menu)
         {
         case 0:
             break;
@@ -169,9 +169,9 @@ void btUp()
 
 void btDown()
 {
-    if(g_pos_cursor == 0)
+    if (g_pos_cursor == 0)
     {
-        if(g_current_menu < NUM_SCREENS - 1)
+        if (g_current_menu < NUM_SCREENS - 1)
         {
             g_current_menu++;
             g_lcd_is_clean = false;
@@ -179,7 +179,7 @@ void btDown()
     }
     else
     {
-        switch(g_current_menu)
+        switch (g_current_menu)
         {
         case 0:
             break;
@@ -207,7 +207,7 @@ void btDown()
 void btSelect()
 {
     // Selection action for each menu
-    switch(g_current_menu)
+    switch (g_current_menu)
     {
     case 0:
         toggleLight();
@@ -233,13 +233,13 @@ void btReleased(int bt)
 {
     if (bt == BT_DOWN)
         btDown();
-    else if(bt == BT_UP)
+    else if (bt == BT_UP)
         btUp();
     else if (bt == BT_SELECT)
         btSelect();
-    else if(bt == BT_LEFT)
+    else if (bt == BT_LEFT)
         btLeft();
-    else if(bt == BT_RIGHT)
+    else if (bt == BT_RIGHT)
         btRight();
 }
 
@@ -250,13 +250,13 @@ int checkButtonPress()
     int bt;
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
-    else if((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
+    else if ((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
         bt = BT_LEFT;
-    else if((bt_analog_value < UP_THRESHOLD) and (bt_analog_value >= DOWN_THRESHOLD))
+    else if ((bt_analog_value < UP_THRESHOLD) and (bt_analog_value >= DOWN_THRESHOLD))
         bt = BT_DOWN;
-    else if((bt_analog_value < DOWN_THRESHOLD) and (bt_analog_value >= RIGHT_THRESHOLD))
+    else if ((bt_analog_value < DOWN_THRESHOLD) and (bt_analog_value >= RIGHT_THRESHOLD))
         bt = BT_UP;
-    else if(bt_analog_value < RIGHT_THRESHOLD)
+    else if (bt_analog_value < RIGHT_THRESHOLD)
         bt = BT_RIGHT;
     else
         bt = BT_NONE;
@@ -266,9 +266,9 @@ int checkButtonPress()
 
 void handleButtonPress(int bt)
 {
-    if((millis() - g_bt_delay) > DEBOUNCE_TIME)
+    if ((millis() - g_bt_delay) > DEBOUNCE_TIME)
     {
-        if((bt == BT_NONE) and (g_prev_bt_state != BT_NONE) )
+        if ((bt == BT_NONE) and (g_prev_bt_state != BT_NONE) )
         {
             btReleased(g_prev_bt_state);
             g_bt_delay = millis();
@@ -285,7 +285,7 @@ void loop()
     handleButtonPress(bt_pressed);
     
     // Print current menu
-    switch(g_current_menu)
+    switch (g_current_menu)
     {
     case 0:
         g_date.print(&lcd);
@@ -305,20 +305,19 @@ void loop()
     case 5:
         g_alarm.print(&lcd);
         break;
-
     default:
         break;
     }
 
     // Print cursor
-    if(g_pos_cursor != 0)
+    if (g_pos_cursor != 0)
     {
         lcd.setCursor(g_pos_cursor, 1);
         lcd.print(F("-"));
     }
 
     // Clear screen if needed
-    if(!g_lcd_is_clean)
+    if (!g_lcd_is_clean)
         clearScreen();
     
     // Executions on background
