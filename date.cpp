@@ -25,8 +25,10 @@ void Date::curUpDate(int8_t* pos_cursor)
     switch (*pos_cursor)
     {
     case 8:
-        if (this->day >= 30)
+        if (this->day > 30)
             this->day -= 30;
+        else if (this->day == 30)
+            this->day = 1;
         else if (this->day >= 22)
             this->day -= 20;
         else
@@ -45,7 +47,9 @@ void Date::curUpDate(int8_t* pos_cursor)
     case 11:
         if (this->month <= 2)
             this->month += 10;
-        else if (this->month >= 10)
+        else if (this->month == 10)
+            this->month = 1;
+        else if (this->month > 10)
             this->month -= 10;
         break;
     case 12:
@@ -81,6 +85,8 @@ void Date::curDownDate(int8_t* pos_cursor)
             this->day += 30;
         else if (this->day < 10)
             this->day += 20;
+        else if (this->day == 10)
+            this->day = 1;
         else
             this->day -= 10;
         break;
@@ -97,7 +103,9 @@ void Date::curDownDate(int8_t* pos_cursor)
     case 11:
         if (this->month <= 2)
             this->month += 10;
-        else if (this->month >= 10)
+        else if (this->month == 10)
+            this->month = 1;
+        else if (this->month > 10)
             this->month -= 10;
         break;
     case 12:
@@ -248,7 +256,7 @@ void Date::secondCount()
     }
     if (this->day == 32)
     {
-        this->day = 0;
+        this->day = 1;
         this->month++;
     }
     if (this->month == 13)
