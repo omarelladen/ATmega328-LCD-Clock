@@ -133,35 +133,27 @@ void Chronometer::print(LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Chrono"));
-    if (this->hour >= 10)
-        lcd->setCursor(8, 0);
-    else
-    {
-        lcd->setCursor(8, 0);
-        lcd->print(0);
 
+    lcd->setCursor(8, 0);
+    if (this->hour < 10)
+    {
+        lcd->print(0);
         lcd->setCursor(9, 0);
     }
     lcd->print(this->hour);
 
-    if (this->minute >= 10)
-        lcd->setCursor(11, 0);
-    else
+    lcd->setCursor(11, 0);
+    if (this->hour < 10)
     {
-        lcd->setCursor(11, 0);
         lcd->print(0);
-
         lcd->setCursor(12, 0);
     }
     lcd->print(this->minute);
 
-    if (this->second >= 10)
-        lcd->setCursor(14, 0);
-    else
+    lcd->setCursor(14, 0);
+    if (this->hour < 10)
     {
-        lcd->setCursor(14, 0);
         lcd->print(0);
-
         lcd->setCursor(15, 0);
     }
     lcd->print(this->second);

@@ -145,52 +145,37 @@ void Alarm::print(LiquidCrystal* lcd) const
     lcd->setCursor(0, 0);
     lcd->print(F("Al"));
 
-    if (this->hour_start >= 10)
-        lcd->setCursor(3, 0);
-    else
+    lcd->setCursor(3, 0);
+    if (this->hour_start < 10)
     {
-        lcd->setCursor(3, 0);
         lcd->print(0);
-
         lcd->setCursor(4, 0);
     }
     lcd->print(this->hour_start);
 
-    if (this->minute_start >= 10)
-        lcd->setCursor(6, 0);
-    else
+    lcd->setCursor(6, 0);
+    if (this->minute_start < 10)
     {
-        lcd->setCursor(6, 0);
         lcd->print(0);
-
         lcd->setCursor(7, 0);
     }
     lcd->print(this->minute_start);
 
-
-    if (this->n_repet >= 10)
-        lcd->setCursor(9, 0);
-    else
+    lcd->setCursor(9, 0);
+    if (this->n_repet < 10)
     {
-        lcd->setCursor(9, 0);
         lcd->print(0);
-
         lcd->setCursor(10, 0);
     }
     lcd->print(this->n_repet);
 
-
-    if (this->interval_min_repet >= 10)
-        lcd->setCursor(13, 0);
-    else
+    lcd->setCursor(13, 0);
+    if (this->interval_min_repet < 10)
     {
-        lcd->setCursor(13, 0);
         lcd->print(0);
-
         lcd->setCursor(14, 0);
     }
     lcd->print(this->interval_min_repet);
-
 
     lcd->setCursor(5, 0);
     lcd->print(F(":"));
