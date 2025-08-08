@@ -119,7 +119,7 @@ void Timer::secondCount()
     this->second--;
     if (this->second == -1)
     {
-        this->second = 59;  ///// -1
+        this->second = 59;
         this->minute--;
     }
     if (this->minute == -1)

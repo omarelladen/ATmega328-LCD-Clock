@@ -40,7 +40,6 @@ void Date::curUpDate(int8_t* pos_cursor)
         else
             this->day++;
         break;
-
     case 11:
         if (this->month <= 2)
             this->month += 10;
@@ -55,7 +54,6 @@ void Date::curUpDate(int8_t* pos_cursor)
         else
             this->month++;
         break;
-
     case 14:
         if (this->year >= 90)
             this->year -= 90;
@@ -101,7 +99,6 @@ void Date::curDownDate(int8_t* pos_cursor)
     case 12:
         if (this->month == 10)
             this->month = 12;
-
         else if (this->month % 10 == 0)
             this->month += 9;
         else
@@ -144,7 +141,6 @@ void Date::curUpTime(int8_t* pos_cursor)
         else
             this->hour++;
         break;
-
     case 11:
         if (this->minute >= 50)
             this->minute -= 50;
@@ -157,7 +153,6 @@ void Date::curUpTime(int8_t* pos_cursor)
         else
             this->minute++;
         break;
-
     case 14:
         if (this->second >= 50)
             this->second -= 50;
