@@ -14,7 +14,6 @@ Timer g_timer;
 Chronometer g_chrono;
 Alarm g_alarm(&g_date);
 
-bool g_lcd_is_clean = false;
 bool g_light_is_on = true;
 int8_t g_current_menu = 0;
 int8_t g_pos_cursor = 0;
@@ -29,30 +28,7 @@ void setup()
     lcd.begin(16, 2);
 
     Serial.begin(9600);
-    delay(2000);
     while (!Serial);
-
-    Serial.print(F("int:"));
-    Serial.println(sizeof(int));
-    
-    Serial.print(F("bool:"));
-    Serial.println(sizeof(bool));
-
-    Serial.print(F("short:"));
-    Serial.println(sizeof(short));
-    
-    Serial.print(F("long:"));
-    Serial.println(sizeof(long));
-
-    Serial.print(F("long long:"));
-    Serial.println(sizeof(long long));
-}
-
-
-void clearScreen()
-{
-    lcd.clear();
-    g_lcd_is_clean = true;
 }
 
 void toggleLight()
@@ -77,7 +53,7 @@ void btLeft()
         if (g_pos_cursor == 8)
         {
             g_pos_cursor = 0;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
         else if (g_pos_cursor > 8)
         {
@@ -85,7 +61,7 @@ void btLeft()
                 g_pos_cursor -= 2;
             else
                 g_pos_cursor--;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
     }
     else if (g_current_menu == 5)
@@ -93,7 +69,7 @@ void btLeft()
         if (g_pos_cursor == 3)
         {
             g_pos_cursor = 0;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
         else if (g_pos_cursor > 2)
         {
@@ -103,7 +79,7 @@ void btLeft()
                 g_pos_cursor -= 3;
             else
                 g_pos_cursor--;
-            g_lcd_is_clean = false;
+            lcd.clear();
         } 
     }
 }
@@ -115,7 +91,7 @@ void btRight()
         if (g_pos_cursor == 0)
         {
             g_pos_cursor = 8;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
         else if (g_pos_cursor < 15)
         {
@@ -123,7 +99,7 @@ void btRight()
                 g_pos_cursor += 2;
             else
                 g_pos_cursor++;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
     }
     else if (g_current_menu == 5)
@@ -131,7 +107,7 @@ void btRight()
         if (g_pos_cursor == 0)
         {
             g_pos_cursor = 3;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
         else if (g_pos_cursor < 14)
         {
@@ -141,7 +117,7 @@ void btRight()
                 g_pos_cursor += 3;
             else
                 g_pos_cursor++;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
     }
 }
@@ -153,7 +129,7 @@ void btUp()
        if (g_current_menu > 0)
         {
             g_current_menu--;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
     } 
     else
@@ -190,7 +166,7 @@ void btDown()
         if (g_current_menu < NUM_SCREENS - 1)
         {
             g_current_menu++;
-            g_lcd_is_clean = false;
+            lcd.clear();
         }
     }
     else
@@ -331,12 +307,8 @@ void loop()
         lcd.setCursor(g_pos_cursor, 1);
         lcd.print(F("-"));
     }
-
-    // Clear screen if needed
-    if (!g_lcd_is_clean)
-        clearScreen();
     
-    // Executions on background
+    // Execute on background
     g_date.execute();
     g_chrono.execute();
     g_timer.execute();
