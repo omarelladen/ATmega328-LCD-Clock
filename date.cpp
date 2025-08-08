@@ -265,81 +265,61 @@ void Date::secondCount()
 
 void Date::print(LiquidCrystal* lcd) const
 {
-    if (this->day >= 10)
-        lcd->setCursor(8, 1);
-    else
+    lcd->setCursor(4, 1);
+    if (this->day < 10)
     {
-        lcd->setCursor(8, 1);
         lcd->print(0);
-
-        lcd->setCursor(9, 1);
+        lcd->setCursor(5, 1);
     }
     lcd->print(this->day);
 
-    if (this->month >= 10)
-        lcd->setCursor(11, 1);
-    else
+    lcd->setCursor(7, 1);
+    if (this->month < 10)
     {
-        lcd->setCursor(11, 1);
         lcd->print(0);
-
-        lcd->setCursor(12, 1);
+        lcd->setCursor(8, 1);
     }
     lcd->print(this->month);
 
-    if (this->year >= 10)
-        lcd->setCursor(14, 1);
-    else
+    lcd->setCursor(10, 1);
+    if (this->year < 10)
     {
-        lcd->setCursor(14, 1);
         lcd->print(0);
-
-        lcd->setCursor(15, 1);
+        lcd->setCursor(11, 1);
     }
     lcd->print(this->year);
 
-
-    if (this->hour >= 10)
-        lcd->setCursor(8, 0);
-    else
+    lcd->setCursor(4, 0);
+    if (this->hour < 10)
     {
-        lcd->setCursor(8, 0);
         lcd->print(0);
-
-        lcd->setCursor(9, 0);
+        lcd->setCursor(5, 0);
     }
     lcd->print(this->hour);
 
-    if (this->minute >= 10)
-        lcd->setCursor(11, 0);
-    else
+    lcd->setCursor(7, 0);
+    if (this->minute < 10)
     {
-        lcd->setCursor(11, 0);
         lcd->print(0);
-
-        lcd->setCursor(12, 0);
+        lcd->setCursor(8, 0);
     }
     lcd->print(this->minute);
 
-    if (this->second >= 10)
-        lcd->setCursor(14, 0);
-    else
+    lcd->setCursor(10, 0);
+    if (this->second < 10)
     {
-        lcd->setCursor(14, 0);
         lcd->print(0);
-
-        lcd->setCursor(15, 0);
+        lcd->setCursor(11, 0);
     }
     lcd->print(this->second);
 
-    lcd->setCursor(10, 0);
+    lcd->setCursor(6, 0);
     lcd->print(F(":"));
-    lcd->setCursor(13, 0);
+    lcd->setCursor(9, 0);
     lcd->print(F(":"));
-
-    lcd->setCursor(10, 1);
+    lcd->setCursor(6, 1);
     lcd->print(F("/"));
-    lcd->setCursor(13, 1);
+    lcd->setCursor(9, 1);
     lcd->print(F("/"));
 }
 
@@ -348,7 +328,7 @@ void Date::printDate(LiquidCrystal* lcd) const
     lcd->setCursor(0, 0);
     lcd->print(F("Date"));
 
-        if (this->day >= 10)
+    if (this->day >= 10)
         lcd->setCursor(8, 0);
     else
     {

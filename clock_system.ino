@@ -29,6 +29,7 @@ void setup()
     lcd.begin(16, 2);
 
     Serial.begin(9600);
+    delay(2000);
     while (!Serial);
 
     Serial.print(F("int:"));
@@ -36,6 +37,15 @@ void setup()
     
     Serial.print(F("bool:"));
     Serial.println(sizeof(bool));
+
+    Serial.print(F("short:"));
+    Serial.println(sizeof(short));
+    
+    Serial.print(F("long:"));
+    Serial.println(sizeof(long));
+
+    Serial.print(F("long long:"));
+    Serial.println(sizeof(long long));
 }
 
 
