@@ -1,8 +1,8 @@
 #include "date.h"
 
 Date::Date():
-day(0),
-month(0),
+day(1),
+month(1),
 year(0),
 second(0),
 minute(0),
@@ -35,6 +35,8 @@ void Date::curUpDate(int8_t* pos_cursor)
     case 9:
         if (this->day == 31)
             this->day = 30;
+        else if (this->day == 9)
+            this->day = 1;
         else if (this->day % 10 == 9)
             this->day -= 9;
         else
@@ -49,8 +51,8 @@ void Date::curUpDate(int8_t* pos_cursor)
     case 12:
         if (this->month == 12)
             this->month = 10;
-        else if (this->month % 10 == 9)
-            this->month -= 9;
+        else if (this->month == 9)
+            this->month = 1;
         else
             this->month++;
         break;
@@ -85,6 +87,8 @@ void Date::curDownDate(int8_t* pos_cursor)
     case 9:
         if (this->day == 30)
             this->day = 31;
+        else if (this->day == 1)
+            this->day = 9;
         else if (this->day % 10 == 0)
             this->day += 9;
         else
@@ -99,8 +103,8 @@ void Date::curDownDate(int8_t* pos_cursor)
     case 12:
         if (this->month == 10)
             this->month = 12;
-        else if (this->month % 10 == 0)
-            this->month += 9;
+        else if (this->month == 1)
+            this->month = 9;
         else
             this->month--;
         break;
@@ -249,7 +253,7 @@ void Date::secondCount()
     }
     if (this->month == 13)
     {
-        this->month = 0;
+        this->month = 1;
         this->year++;
     }
     if (this->year == 100)
