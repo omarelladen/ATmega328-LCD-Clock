@@ -270,7 +270,7 @@ void Date::secondCount()
     }
 }
 
-void Date::print(LiquidCrystal* lcd) const
+void Date::printDateAndTime(LiquidCrystal* lcd) const
 {
     lcd->setCursor(4, 1);
     if (this->day < 10)

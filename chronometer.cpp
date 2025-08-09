@@ -58,6 +58,7 @@ void Chronometer::curUp(int8_t* pos_cursor)
         break;
     }
 }
+
 void Chronometer::curDown(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
@@ -143,7 +144,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
     lcd->print(this->hour);
 
     lcd->setCursor(11, 0);
-    if (this->hour < 10)
+    if (this->minute < 10)
     {
         lcd->print(0);
         lcd->setCursor(12, 0);
@@ -151,7 +152,7 @@ void Chronometer::print(LiquidCrystal* lcd) const
     lcd->print(this->minute);
 
     lcd->setCursor(14, 0);
-    if (this->hour < 10)
+    if (this->second < 10)
     {
         lcd->print(0);
         lcd->setCursor(15, 0);

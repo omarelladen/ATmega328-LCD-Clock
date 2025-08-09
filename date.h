@@ -24,7 +24,7 @@ class Date {
         void curUpTime(int8_t* pos_cursor);
         void curDownTime(int8_t* pos_cursor);
         void secondCount();
-        void print(LiquidCrystal* lcd) const;
+        void printDateAndTime(LiquidCrystal* lcd) const;
         void printDate(LiquidCrystal* lcd) const;
         void printTime(LiquidCrystal* lcd) const;
         void update();

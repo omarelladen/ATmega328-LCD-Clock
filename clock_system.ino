@@ -136,8 +136,6 @@ void btUp()
     {
         switch (g_current_menu)
         {
-        case 0:
-            break;
         case 1:
             g_date.curUpDate(&g_pos_cursor);
             break;
@@ -173,8 +171,6 @@ void btDown()
     {
         switch (g_current_menu)
         {
-        case 0:
-            break;
         case 1:
             g_date.curDownDate(&g_pos_cursor);
             break;
@@ -204,17 +200,11 @@ void btSelect()
     case 0:
         toggleLight();
         break;
-    case 1:
-        break;
-    case 2:
-        break;
     case 3:
         g_chrono.toggle();
         break;
     case 4:
         g_timer.toggle();
-        break;
-    case 5:
         break;
     default:
         break;
@@ -280,7 +270,7 @@ void loop()
     switch (g_current_menu)
     {
     case 0:
-        g_date.print(&lcd);
+        g_date.printDateAndTime(&lcd);
         break;
     case 1:
         g_date.printDate(&lcd);
