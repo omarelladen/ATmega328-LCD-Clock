@@ -187,11 +187,15 @@ void Alarm::print(LiquidCrystal* lcd) const
 
 void Alarm::execute()
 {
-    int found = 0;
-    for (int i=0; i < this->n_repet; i++)
+    bool found = false;
+    int8_t hour_to_check;
+    int8_t minute_to_check;
+    int8_t i;
+
+    for (i=0; i < this->n_repet; i++)
     {
-        int hour_to_check = this->hour_start + i * interval_min_repet / 60;
-        int minute_to_check = this->minute_start + i * interval_min_repet % 60;
+        hour_to_check = this->hour_start + i * interval_min_repet / 60;
+        minute_to_check = this->minute_start + i * interval_min_repet % 60;
 
         if (hour_to_check == date->getHour() && minute_to_check == date->getMinute())
         {
@@ -200,7 +204,7 @@ void Alarm::execute()
                 Serial.println(F("Alarm ON"));
                 this->is_alarm_on = true;
             }
-            found = 1;
+            found = true;
             break;
         }
     }
