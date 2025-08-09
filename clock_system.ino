@@ -238,8 +238,8 @@ void btReleased(int8_t bt)
 int8_t checkButtonPress()
 {
     int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
-
     int8_t bt;
+    
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
     else if ((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
