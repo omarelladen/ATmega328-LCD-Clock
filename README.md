@@ -2,8 +2,8 @@
 - No pin actions are implemented other than the ones for the LCD
 
 Features:
-- Date
-- Time (variation on numbers of days in different months is not implemented)
+- Date (variation on numbers of days in different months is not implemented)
+- Time 
 - Timer
 - Chronometer
 - Alarm difined by start time, number of repetitions and interval of repetition in minutes
