@@ -58,6 +58,7 @@ void Timer::curUp(int8_t* pos_cursor)
         break;
     }
 }
+
 void Timer::curDown(int8_t* pos_cursor)
 {
     switch (*pos_cursor)
