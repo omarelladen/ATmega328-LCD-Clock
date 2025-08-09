@@ -227,9 +227,11 @@ void btReleased(int8_t bt)
 
 int8_t checkButtonPress()
 {
-    int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
+    int16_t bt_analog_value;
     int8_t bt;
     
+    bt_analog_value = analogRead(PIN_SHIELD_BTS);
+
     if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
     else if ((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
@@ -262,8 +264,10 @@ void handleButtonPress(int8_t bt)
 
 void loop()
 {
+    int8_t bt_pressed;
+
     // Event Management
-    int8_t bt_pressed = checkButtonPress();
+    bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
     // Print current menu
