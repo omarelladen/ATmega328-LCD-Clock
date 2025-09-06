@@ -232,13 +232,13 @@ int8_t checkButtonPress()
     
     bt_analog_value = analogRead(PIN_SHIELD_BTS);
 
-    if ((bt_analog_value < SEL_THRESHOLD) and (bt_analog_value >= LEFT_THRESHOLD))
+    if ((bt_analog_value < SEL_THRESHOLD) && (bt_analog_value >= LEFT_THRESHOLD))
         bt = BT_SELECT;
-    else if ((bt_analog_value < LEFT_THRESHOLD) and (bt_analog_value >= UP_THRESHOLD))
+    else if ((bt_analog_value < LEFT_THRESHOLD) && (bt_analog_value >= UP_THRESHOLD))
         bt = BT_LEFT;
-    else if ((bt_analog_value < UP_THRESHOLD) and (bt_analog_value >= DOWN_THRESHOLD))
+    else if ((bt_analog_value < UP_THRESHOLD) && (bt_analog_value >= DOWN_THRESHOLD))
         bt = BT_DOWN;
-    else if ((bt_analog_value < DOWN_THRESHOLD) and (bt_analog_value >= RIGHT_THRESHOLD))
+    else if ((bt_analog_value < DOWN_THRESHOLD) && (bt_analog_value >= RIGHT_THRESHOLD))
         bt = BT_UP;
     else if (bt_analog_value < RIGHT_THRESHOLD)
         bt = BT_RIGHT;
@@ -252,7 +252,7 @@ void handleButtonPress(int8_t bt)
 {
     if ((millis() - g_bt_delay) > DEBOUNCE_TIME)
     {
-        if ((bt == BT_NONE) and (g_prev_bt_state != BT_NONE) )
+        if ((bt == BT_NONE) && (g_prev_bt_state != BT_NONE))
         {
             btReleased(g_prev_bt_state);
             g_bt_delay = millis();
