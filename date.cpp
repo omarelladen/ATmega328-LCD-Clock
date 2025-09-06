@@ -60,7 +60,9 @@ void Date::curUpDate(int8_t* pos_cursor)
         break;
 
     case 11:
-        if (this->month <= 2)
+        if (this->day == 31 && this->month == 1)
+            ;
+        else if (this->month <= 2)
             this->month += 10;
         else if (this->month == 10)
             this->month = 1;
@@ -138,7 +140,9 @@ void Date::curDownDate(int8_t* pos_cursor)
         break;
 
     case 11:
-        if (this->month <= 2)
+        if (this->day == 31 && this->month == 1)
+            ;
+        else if (this->month <= 2)
             this->month += 10;
         else if (this->month == 10)
             this->month = 1;
@@ -434,7 +438,7 @@ void Date::printTime(LiquidCrystal* lcd) const
     lcd->setCursor(0, 0);
     lcd->print(F("Time"));
 
-        if (this->hour >= 10)
+    if (this->hour >= 10)
         lcd->setCursor(8, 0);
     else
     {
