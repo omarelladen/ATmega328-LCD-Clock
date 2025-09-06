@@ -231,7 +231,7 @@ void btReleased(int8_t bt)
         btRight();
 }
 
-const int8_t checkButtonPress()
+int8_t checkButtonPress()
 {
     int8_t bt;
     const int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);

@@ -17,8 +17,8 @@ Date::~Date()
 {
 }
 
-int8_t Date::getHour() { return this->hour; }
-int8_t Date::getMinute() { return this->minute; }
+int8_t Date::getHour() const { return this->hour; }
+int8_t Date::getMinute() const { return this->minute; }
 
 void Date::curUpDate(const int8_t pos_cursor)
 {
@@ -100,6 +100,7 @@ void Date::curUpDate(const int8_t pos_cursor)
         else
             this->year++;
         break;
+        
     default:
         break;
     }
@@ -180,6 +181,7 @@ void Date::curDownDate(const int8_t pos_cursor)
         else
             this->year--;
         break;
+
     default:
         break;
     }
@@ -231,6 +233,7 @@ void Date::curUpTime(const int8_t pos_cursor)
         else
             this->second++;
         break;
+
     default:
         break;
     }
@@ -284,6 +287,7 @@ void Date::curDownTime(const int8_t pos_cursor)
         else
             this->second--;
         break;
+
     default:
         break;
     }
@@ -490,8 +494,6 @@ void Date::update()
 
 void Date::execute()
 {
-
-
     if (this->is_running)
         this->update();
 }
