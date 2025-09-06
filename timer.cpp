@@ -30,6 +30,7 @@ void Timer::curUp(const int8_t pos_cursor)
         else
             this->hour++;
         break;
+
     case 11:
         if (this->minute >= 50)
             this->minute -= 50;
@@ -42,6 +43,7 @@ void Timer::curUp(const int8_t pos_cursor)
         else
             this->minute++;
         break;
+
     case 14:
         if (this->second >= 50)
             this->second -= 50;
@@ -54,6 +56,7 @@ void Timer::curUp(const int8_t pos_cursor)
         else
             this->second++;
         break;
+
     default:
         break;
     }
@@ -75,6 +78,7 @@ void Timer::curDown(const int8_t pos_cursor)
         else
             this->hour--;
         break;
+
     case 11:
         if (this->minute < 10)
             this->minute += 50;
@@ -87,6 +91,7 @@ void Timer::curDown(const int8_t pos_cursor)
         else
             this->minute--;
         break;
+
     case 14:
         if (this->second < 10)
             this->second += 50;
@@ -99,6 +104,7 @@ void Timer::curDown(const int8_t pos_cursor)
         else
             this->second--;
         break;
+        
     default:
         break;
     }
@@ -177,7 +183,9 @@ void Timer::update()
 
 void Timer::execute()
 {
-    if (this->hour == 0 && this->minute == 0 && this->second == 0)
+    if (this->hour == 0 &&
+        this->minute == 0 &&
+        this->second == 0)
     {
         is_running = false;
     }

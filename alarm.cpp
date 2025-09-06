@@ -35,6 +35,7 @@ void Alarm::curUp(const int8_t pos_cursor)
         else
             this->hour_start++;
         break;
+
     case 6:
         if (this->minute_start >= 50)
             this->minute_start -= 50;
@@ -47,6 +48,7 @@ void Alarm::curUp(const int8_t pos_cursor)
         else
             this->minute_start++;
         break;
+
     case 9:
         if (this->n_repet >= 90)
             this->n_repet -= 90;
@@ -59,6 +61,7 @@ void Alarm::curUp(const int8_t pos_cursor)
         else
             this->n_repet++;
         break;
+
     case 13:
         if (this->interval_min_repet >= 90)
             this->interval_min_repet -= 90;
@@ -71,6 +74,7 @@ void Alarm::curUp(const int8_t pos_cursor)
         else
             this->interval_min_repet++;
         break;
+        
     default:
         break;
     }
@@ -92,13 +96,14 @@ void Alarm::curDown(const int8_t pos_cursor)
             this->hour_start -= 10;
         break;
     case 4:
-        if (this->hour_start == 20) // 20 down => 23 
+        if (this->hour_start == 20)
             this->hour_start = 23;
         else if (this->hour_start % 10 == 0)
             this->hour_start += 9;
         else
             this->hour_start--;
         break;
+
     case 6:
         if (this->minute_start < 10)
             this->minute_start += 50;
@@ -111,6 +116,7 @@ void Alarm::curDown(const int8_t pos_cursor)
         else
             this->minute_start--;
         break;
+
     case 9:
         if (this->n_repet < 10)
             this->n_repet += 90;
@@ -123,6 +129,7 @@ void Alarm::curDown(const int8_t pos_cursor)
         else
             this->n_repet--;
         break;
+
     case 13:
         if (this->interval_min_repet < 10)
             this->interval_min_repet += 90;
@@ -135,6 +142,7 @@ void Alarm::curDown(const int8_t pos_cursor)
         else
             this->interval_min_repet--;
         break;
+
     default:
         break;
     }
@@ -197,7 +205,8 @@ void Alarm::execute()
         hour_to_check = this->hour_start + i * interval_min_repet / 60;
         minute_to_check = this->minute_start + i * interval_min_repet % 60;
 
-        if (hour_to_check == date->getHour() && minute_to_check == date->getMinute())
+        if (hour_to_check == date->getHour() &&
+            minute_to_check == date->getMinute())
         {
             if (!this->is_alarm_on)
             {

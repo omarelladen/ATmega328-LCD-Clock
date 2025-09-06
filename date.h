@@ -17,8 +17,8 @@ class Date {
     public:
         Date();
         ~Date();
-        int8_t getHour();
-        int8_t getMinute();
+        int8_t getHour() const;
+        int8_t getMinute() const;
         void curUpDate(const int8_t pos_cursor);
         void curDownDate(const int8_t pos_cursor);
         void curUpTime(const int8_t pos_cursor);

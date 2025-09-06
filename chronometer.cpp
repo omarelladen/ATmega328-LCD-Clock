@@ -30,6 +30,7 @@ void Chronometer::curUp(int8_t pos_cursor)
         else
             this->hour++;
         break;
+
     case 11:
         if (this->minute >= 50)
             this->minute -= 50;
@@ -42,6 +43,7 @@ void Chronometer::curUp(int8_t pos_cursor)
         else
             this->minute++;
         break;
+
     case 14:
         if (this->second >= 50)
             this->second -= 50;
@@ -54,6 +56,7 @@ void Chronometer::curUp(int8_t pos_cursor)
         else
             this->second++;
         break;
+
     default:
         break;
     }
@@ -75,6 +78,7 @@ void Chronometer::curDown(int8_t pos_cursor)
         else
             this->hour--;
         break;
+
     case 11:
         if (this->minute < 10)
             this->minute += 50;
@@ -87,6 +91,7 @@ void Chronometer::curDown(int8_t pos_cursor)
         else
             this->minute--;
         break;
+
     case 14:
         if (this->second < 10)
             this->second += 50;
@@ -99,6 +104,7 @@ void Chronometer::curDown(int8_t pos_cursor)
         else
             this->second--;
         break;
+        
     default:
         break;
     }
