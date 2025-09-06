@@ -25,17 +25,31 @@ void Date::curUpDate(int8_t* pos_cursor)
     switch (*pos_cursor)
     {
     case 8:
-        if (this->day > 30)
+        if (this->day == 21 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+            this->day = 1;
+        else if (this->day == 20 && this->month == 2)
+            this->day = 10;
+        else if (this->day == 21 && this->month == 2)
+            this->day = 11;
+        else if (this->day == 19 && this->month == 2 && this->year % 4 != 0)
+            this->day = 9;
+        else if (this->day > 30)
             this->day -= 30;
         else if (this->day == 30)
-            this->day = 1;
+            this->day = 10;
         else if (this->day >= 22)
             this->day -= 20;
         else
             this->day += 10;
         break;
     case 9:
-        if (this->day == 31)
+        if (this->day == 29 && this->month == 2 && this->year % 4 == 0)
+            this->day = 20;
+        else if (this->day == 28 && this->month == 2 && this->year % 4 != 0)
+            this->day = 20;
+        else if (this->day == 30 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+            ;
+        else if (this->day == 31)
             this->day = 30;
         else if (this->day == 9)
             this->day = 1;
@@ -44,6 +58,7 @@ void Date::curUpDate(int8_t* pos_cursor)
         else
             this->day++;
         break;
+
     case 11:
         if (this->month <= 2)
             this->month += 10;
@@ -53,21 +68,32 @@ void Date::curUpDate(int8_t* pos_cursor)
             this->month -= 10;
         break;
     case 12:
-        if (this->month == 12)
+        if (this->day == 31 && this->month != 7)
+            ;
+        else if (this->day > 28 && this->month == 1 && this->year % 4 != 0)
+            ;
+        else if (this->day > 29 && this->month == 1 && this->year % 4 == 0)
+            ;
+        else if (this->month == 12)
             this->month = 10;
         else if (this->month == 9)
             this->month = 1;
         else
             this->month++;
         break;
+
     case 14:
-        if (this->year >= 90)
+        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+            ;
+        else if (this->year >= 90)
             this->year -= 90;
         else
             this->year += 10;
         break;
     case 15:
-        if (this->year % 10 == 9)
+        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+            ;
+        else if (this->year % 10 == 9)
             this->year -= 9;
         else
             this->year++;
@@ -81,17 +107,27 @@ void Date::curDownDate(int8_t* pos_cursor)
     switch (*pos_cursor)
     {
     case 8:
-        if (this->day <= 1)
+        if (this->day == 1 && (this->month == 2 || this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+            this->day = 21;
+        else if (this->day == 9 && this->month == 2 && this->year % 4 != 0)
+            this->day = 19;
+        else if (this->day <= 1)
             this->day += 30;
         else if (this->day < 10)
             this->day += 20;
+        else if (this->day == 10 && this->month == 2)
+            this->day = 20;
         else if (this->day == 10)
-            this->day = 1;
+            this->day = 30;
         else
             this->day -= 10;
         break;
     case 9:
-        if (this->day == 30)
+        if (this->day == 20 && this->month == 2 && this->year % 4 != 0)
+            this->day = 28;
+        else if (this->day == 30 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+            ;
+        else if (this->day == 30)
             this->day = 31;
         else if (this->day == 1)
             this->day = 9;
@@ -100,6 +136,7 @@ void Date::curDownDate(int8_t* pos_cursor)
         else
             this->day--;
         break;
+
     case 11:
         if (this->month <= 2)
             this->month += 10;
@@ -109,21 +146,32 @@ void Date::curDownDate(int8_t* pos_cursor)
             this->month -= 10;
         break;
     case 12:
-        if (this->month == 10)
+        if (this->day == 31 && this->month != 8)
+            ;
+        else if (this->day > 28 && this->month == 3 && this->year % 4 != 0)
+            ;
+        else if (this->day > 29 && this->month == 3 && this->year % 4 == 0)
+            ;
+        else if (this->month == 10)
             this->month = 12;
         else if (this->month == 1)
             this->month = 9;
         else
             this->month--;
         break;
+
     case 14:
-        if (this->year < 10)
+        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+            ;
+        else if (this->year < 10)
             this->year += 90;
         else
             this->year -= 10;
         break;
     case 15:
-        if (this->year % 10 == 0)
+        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+            ;
+        else if (this->year % 10 == 0)
             this->year += 9;
         else
             this->year--;
@@ -153,6 +201,7 @@ void Date::curUpTime(int8_t* pos_cursor)
         else
             this->hour++;
         break;
+
     case 11:
         if (this->minute >= 50)
             this->minute -= 50;
@@ -165,6 +214,7 @@ void Date::curUpTime(int8_t* pos_cursor)
         else
             this->minute++;
         break;
+
     case 14:
         if (this->second >= 50)
             this->second -= 50;
@@ -197,7 +247,7 @@ void Date::curDownTime(int8_t* pos_cursor)
             this->hour -= 10;
         break;
     case 9:
-        if (this->hour == 20) // 20 down => 23 
+        if (this->hour == 20)
             this->hour = 23;
         else if (this->hour % 10 == 0)
             this->hour += 9;
@@ -254,7 +304,11 @@ void Date::secondCount()
         this->hour = 0;
         this->day++;
     }
-    if (this->day == 32)
+
+    if ((this->day == 31 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11)) ||
+        (this->day == 29 && this->month == 2 && this->year % 4 != 0) ||
+        (this->day == 30 && this->month == 2 && this->year % 4 == 0) ||
+        this->day == 32)
     {
         this->day = 1;
         this->month++;
@@ -264,6 +318,7 @@ void Date::secondCount()
         this->month = 1;
         this->year++;
     }
+
     if (this->year == 100)
     {
         this->year = 0;
