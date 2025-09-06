@@ -48,7 +48,10 @@ void toggleLight()
 
 void btLeft()
 {
-    if (g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
+    if (g_current_menu == 1 ||
+        g_current_menu == 2 ||
+        g_current_menu == 3 ||
+        g_current_menu == 4)
     {    
         if (g_pos_cursor == 8)
         {
@@ -86,7 +89,10 @@ void btLeft()
 
 void btRight()
 {
-    if (g_current_menu == 1 || g_current_menu == 2 || g_current_menu == 3 || g_current_menu == 4)
+    if (g_current_menu == 1 ||
+        g_current_menu == 2 ||
+        g_current_menu == 3 ||
+        g_current_menu == 4)
     {   
         if (g_pos_cursor == 0)
         {
@@ -137,19 +143,19 @@ void btUp()
         switch (g_current_menu)
         {
         case 1:
-            g_date.curUpDate(&g_pos_cursor);
+            g_date.curUpDate(g_pos_cursor);
             break;
         case 2:
-            g_date.curUpTime(&g_pos_cursor);
+            g_date.curUpTime(g_pos_cursor);
             break;
         case 3:
-            g_chrono.curUp(&g_pos_cursor);
+            g_chrono.curUp(g_pos_cursor);
             break;
         case 4:
-            g_timer.curUp(&g_pos_cursor);
+            g_timer.curUp(g_pos_cursor);
             break;
         case 5:
-            g_alarm.curUp(&g_pos_cursor);
+            g_alarm.curUp(g_pos_cursor);
             break;
         default:
             break;
@@ -172,19 +178,19 @@ void btDown()
         switch (g_current_menu)
         {
         case 1:
-            g_date.curDownDate(&g_pos_cursor);
+            g_date.curDownDate(g_pos_cursor);
             break;
         case 2:
-            g_date.curDownTime(&g_pos_cursor);
+            g_date.curDownTime(g_pos_cursor);
             break;
         case 3:
-            g_chrono.curDown(&g_pos_cursor);
+            g_chrono.curDown(g_pos_cursor);
             break;
         case 4:
-            g_timer.curDown(&g_pos_cursor);
+            g_timer.curDown(g_pos_cursor);
             break;
         case 5:
-            g_alarm.curDown(&g_pos_cursor);
+            g_alarm.curDown(g_pos_cursor);
             break;
         default:
             break;
@@ -225,30 +231,28 @@ void btReleased(int8_t bt)
         btRight();
 }
 
-int8_t checkButtonPress()
+const int8_t checkButtonPress()
 {
-    int16_t bt_analog_value;
     int8_t bt;
-    
-    bt_analog_value = analogRead(PIN_SHIELD_BTS);
+    const int16_t bt_analog_value = analogRead(PIN_SHIELD_BTS);
 
-    if ((bt_analog_value < SEL_THRESHOLD) && (bt_analog_value >= LEFT_THRESHOLD))
-        bt = BT_SELECT;
-    else if ((bt_analog_value < LEFT_THRESHOLD) && (bt_analog_value >= UP_THRESHOLD))
-        bt = BT_LEFT;
-    else if ((bt_analog_value < UP_THRESHOLD) && (bt_analog_value >= DOWN_THRESHOLD))
-        bt = BT_DOWN;
-    else if ((bt_analog_value < DOWN_THRESHOLD) && (bt_analog_value >= RIGHT_THRESHOLD))
-        bt = BT_UP;
-    else if (bt_analog_value < RIGHT_THRESHOLD)
+    if (bt_analog_value < RIGHT_THRESHOLD)
         bt = BT_RIGHT;
+    else if (bt_analog_value < DOWN_THRESHOLD)
+        bt = BT_UP;
+    else if (bt_analog_value < UP_THRESHOLD)
+        bt = BT_DOWN;
+    else if (bt_analog_value < LEFT_THRESHOLD)
+        bt = BT_LEFT;
+    else if (bt_analog_value < SEL_THRESHOLD)
+        bt = BT_SELECT;
     else
         bt = BT_NONE;
 
     return bt;
 }
 
-void handleButtonPress(int8_t bt)
+void handleButtonPress(const int8_t bt)
 {
     if ((millis() - g_bt_delay) > DEBOUNCE_TIME)
     {
@@ -264,10 +268,8 @@ void handleButtonPress(int8_t bt)
 
 void loop()
 {
-    int8_t bt_pressed;
-
     // Event Management
-    bt_pressed = checkButtonPress();
+    const int8_t bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
     
     // Print current menu

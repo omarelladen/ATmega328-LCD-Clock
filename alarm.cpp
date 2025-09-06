@@ -15,9 +15,9 @@ Alarm::~Alarm()
 {
 }
 
-void Alarm::curUp(int8_t* pos_cursor)
+void Alarm::curUp(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 3:
         if (this->hour_start >= 20)
@@ -76,9 +76,9 @@ void Alarm::curUp(int8_t* pos_cursor)
     }
 }
 
-void Alarm::curDown(int8_t* pos_cursor)
+void Alarm::curDown(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 3:
         if (this->hour_start < 10)
@@ -140,7 +140,7 @@ void Alarm::curDown(int8_t* pos_cursor)
     }
 }
 
-void Alarm::print(LiquidCrystal* lcd) const
+void Alarm::print(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Al"));

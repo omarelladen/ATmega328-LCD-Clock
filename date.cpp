@@ -20,9 +20,9 @@ Date::~Date()
 int8_t Date::getHour() { return this->hour; }
 int8_t Date::getMinute() { return this->minute; }
 
-void Date::curUpDate(int8_t* pos_cursor)
+void Date::curUpDate(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->day == 21 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
@@ -104,9 +104,9 @@ void Date::curUpDate(int8_t* pos_cursor)
         break;
     }
 }
-void Date::curDownDate(int8_t* pos_cursor)
+void Date::curDownDate(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->day == 1 && (this->month == 2 || this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
@@ -185,9 +185,9 @@ void Date::curDownDate(int8_t* pos_cursor)
     }
 }
 
-void Date::curUpTime(int8_t* pos_cursor)
+void Date::curUpTime(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->hour >= 20)
@@ -235,9 +235,9 @@ void Date::curUpTime(int8_t* pos_cursor)
         break;
     }
 }
-void Date::curDownTime(int8_t* pos_cursor)
+void Date::curDownTime(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->hour < 10)
@@ -329,7 +329,7 @@ void Date::secondCount()
     }
 }
 
-void Date::printDateAndTime(LiquidCrystal* lcd) const
+void Date::printDateAndTime(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(4, 1);
     if (this->day < 10)
@@ -389,7 +389,7 @@ void Date::printDateAndTime(LiquidCrystal* lcd) const
     lcd->print(F("/"));
 }
 
-void Date::printDate(LiquidCrystal* lcd) const
+void Date::printDate(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Date"));
@@ -433,7 +433,7 @@ void Date::printDate(LiquidCrystal* lcd) const
     lcd->print(F("/"));
 }
 
-void Date::printTime(LiquidCrystal* lcd) const
+void Date::printTime(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Time"));
