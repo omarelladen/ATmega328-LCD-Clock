@@ -14,9 +14,9 @@ Timer::~Timer()
 {
 }
 
-void Timer::curUp(int8_t* pos_cursor)
+void Timer::curUp(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->hour >= 90)
@@ -59,9 +59,9 @@ void Timer::curUp(int8_t* pos_cursor)
     }
 }
 
-void Timer::curDown(int8_t* pos_cursor)
+void Timer::curDown(const int8_t pos_cursor)
 {
-    switch (*pos_cursor)
+    switch (pos_cursor)
     {
     case 8:
         if (this->hour < 10)
@@ -130,7 +130,7 @@ void Timer::secondCount()
     }
 }
 
-void Timer::print(LiquidCrystal* lcd) const
+void Timer::print(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(0, 0);
     lcd->print(F("Timer"));

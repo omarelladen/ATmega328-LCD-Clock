@@ -14,11 +14,11 @@ class Chronometer {
     public:
         Chronometer();
         ~Chronometer();
-        void curUp(int8_t* pos_cursor);
-        void curDown(int8_t* pos_cursor);
+        void curUp(const int8_t pos_cursor);
+        void curDown(const int8_t pos_cursor);
         void toggle();
         void secondCount();
-        void print(LiquidCrystal* lcd) const;
+        void print(const LiquidCrystal* lcd) const;
         void update();
         void execute();
 };

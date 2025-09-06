@@ -14,8 +14,8 @@ class Alarm {
     public:
         Alarm(Date* date);
         ~Alarm();
-        void curUp(int8_t* pos_cursor);
-        void curDown(int8_t* pos_cursor);
-        void print(LiquidCrystal* lcd) const;
+        void curUp(const int8_t pos_cursor);
+        void curDown(const int8_t pos_cursor);
+        void print(const LiquidCrystal* lcd) const;
         void execute();
 };
