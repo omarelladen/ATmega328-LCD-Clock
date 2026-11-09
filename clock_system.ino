@@ -24,6 +24,7 @@ unsigned long g_bt_delay = 0;
 void setup()
 {
     pinMode(PIN_LCD_LIGHT, INPUT);
+    pinMode(PIN_SHIELD_BTS, INPUT);
 
     lcd.begin(16, 2);
 
@@ -52,7 +53,7 @@ void btLeft()
         g_current_menu == 2 ||
         g_current_menu == 3 ||
         g_current_menu == 4)
-    {    
+    {
         if (g_pos_cursor == 8)
         {
             g_pos_cursor = 0;
@@ -83,7 +84,7 @@ void btLeft()
             else
                 g_pos_cursor--;
             lcd.clear();
-        } 
+        }
     }
 }
 
@@ -93,7 +94,7 @@ void btRight()
         g_current_menu == 2 ||
         g_current_menu == 3 ||
         g_current_menu == 4)
-    {   
+    {
         if (g_pos_cursor == 0)
         {
             g_pos_cursor = 8;
@@ -137,7 +138,7 @@ void btUp()
             g_current_menu--;
             lcd.clear();
         }
-    } 
+    }
     else
     {
         switch (g_current_menu)
@@ -271,7 +272,7 @@ void loop()
     // Event Management
     const int8_t bt_pressed = checkButtonPress();
     handleButtonPress(bt_pressed);
-    
+
     // Print current menu
     switch (g_current_menu)
     {
@@ -303,7 +304,7 @@ void loop()
         lcd.setCursor(g_pos_cursor, 1);
         lcd.print(F("-"));
     }
-    
+
     // Execute on background
     g_date.execute();
     g_chrono.execute();

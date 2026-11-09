@@ -1,5 +1,6 @@
 #include "chronometer.h"
 
+
 Chronometer::Chronometer():
 second(0),
 minute(0),
@@ -104,7 +105,7 @@ void Chronometer::curDown(int8_t pos_cursor)
         else
             this->second--;
         break;
-        
+
     default:
         break;
     }

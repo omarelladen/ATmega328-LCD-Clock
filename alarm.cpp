@@ -1,5 +1,6 @@
 #include "alarm.h"
 
+
 Alarm::Alarm(Date* date):
 minute_start(0),
 hour_start(0),
@@ -74,7 +75,7 @@ void Alarm::curUp(const int8_t pos_cursor)
         else
             this->interval_min_repet++;
         break;
-        
+
     default:
         break;
     }
@@ -202,7 +203,7 @@ void Alarm::execute()
 
     for (i=0; i < this->n_repet; i++)
     {
-        hour_to_check = this->hour_start + i * interval_min_repet / 60;
+        hour_to_check   = this->hour_start   + i * interval_min_repet / 60;
         minute_to_check = this->minute_start + i * interval_min_repet % 60;
 
         if (hour_to_check == date->getHour() &&
@@ -218,7 +219,7 @@ void Alarm::execute()
         }
     }
 
-    if (!found && this->is_alarm_on) 
+    if (!found && this->is_alarm_on)
     {
         Serial.println(F("Alarm OFF"));
         this->is_alarm_on = false;

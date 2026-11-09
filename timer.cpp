@@ -104,7 +104,7 @@ void Timer::curDown(const int8_t pos_cursor)
         else
             this->second--;
         break;
-        
+
     default:
         break;
     }
