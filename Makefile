@@ -1,4 +1,4 @@
-SRC = src/clock_system.ino
+SRC = src/main.ino
 PORT = /dev/ttyACM0
 BOARD = "arduino:avr:uno"
 
