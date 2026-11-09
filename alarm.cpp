@@ -21,59 +21,59 @@ void Alarm::curUp(const int8_t pos_cursor)
     switch (pos_cursor)
     {
     case 3:
-        if (this->hour_start >= 20)
-            this->hour_start -= 20;
-        else if (this->hour_start > 13)
-            this->hour_start -= 10;
+        if (hour_start >= 20)
+            hour_start -= 20;
+        else if (hour_start > 13)
+            hour_start -= 10;
         else
-            this->hour_start += 10;
+            hour_start += 10;
         break;
     case 4:
-        if (this->hour_start == 23)
-            this->hour_start = 20;
-        else if (this->hour_start % 10 == 9)
-            this->hour_start -= 9;
+        if (hour_start == 23)
+            hour_start = 20;
+        else if (hour_start % 10 == 9)
+            hour_start -= 9;
         else
-            this->hour_start++;
+            hour_start++;
         break;
 
     case 6:
-        if (this->minute_start >= 50)
-            this->minute_start -= 50;
+        if (minute_start >= 50)
+            minute_start -= 50;
         else
-            this->minute_start += 10;
+            minute_start += 10;
         break;
     case 7:
-        if (this->minute_start % 10 == 9)
-            this->minute_start -= 9;
+        if (minute_start % 10 == 9)
+            minute_start -= 9;
         else
-            this->minute_start++;
+            minute_start++;
         break;
 
     case 9:
-        if (this->n_repet >= 90)
-            this->n_repet -= 90;
+        if (n_repet >= 90)
+            n_repet -= 90;
         else
-            this->n_repet += 10;
+            n_repet += 10;
         break;
     case 10:
-        if (this->n_repet % 10 == 9)
-            this->n_repet -= 9;
+        if (n_repet % 10 == 9)
+            n_repet -= 9;
         else
-            this->n_repet++;
+            n_repet++;
         break;
 
     case 13:
-        if (this->interval_min_repet >= 90)
-            this->interval_min_repet -= 90;
+        if (interval_min_repet >= 90)
+            interval_min_repet -= 90;
         else
-            this->interval_min_repet += 10;
+            interval_min_repet += 10;
         break;
     case 14:
-        if (this->interval_min_repet % 10 == 9)
-            this->interval_min_repet -= 9;
+        if (interval_min_repet % 10 == 9)
+            interval_min_repet -= 9;
         else
-            this->interval_min_repet++;
+            interval_min_repet++;
         break;
 
     default:
@@ -86,62 +86,62 @@ void Alarm::curDown(const int8_t pos_cursor)
     switch (pos_cursor)
     {
     case 3:
-        if (this->hour_start < 10)
+        if (hour_start < 10)
         {
-            if (this->hour_start >= 4)
-                this->hour_start += 10;
+            if (hour_start >= 4)
+                hour_start += 10;
             else
-                this->hour_start += 20;
+                hour_start += 20;
         }
         else
-            this->hour_start -= 10;
+            hour_start -= 10;
         break;
     case 4:
-        if (this->hour_start == 20)
-            this->hour_start = 23;
-        else if (this->hour_start % 10 == 0)
-            this->hour_start += 9;
+        if (hour_start == 20)
+            hour_start = 23;
+        else if (hour_start % 10 == 0)
+            hour_start += 9;
         else
-            this->hour_start--;
+            hour_start--;
         break;
 
     case 6:
-        if (this->minute_start < 10)
-            this->minute_start += 50;
+        if (minute_start < 10)
+            minute_start += 50;
         else
-            this->minute_start -= 10;
+            minute_start -= 10;
         break;
     case 7:
-        if (this->minute_start % 10 == 0)
-            this->minute_start += 9;
+        if (minute_start % 10 == 0)
+            minute_start += 9;
         else
-            this->minute_start--;
+            minute_start--;
         break;
 
     case 9:
-        if (this->n_repet < 10)
-            this->n_repet += 90;
+        if (n_repet < 10)
+            n_repet += 90;
         else
-            this->n_repet -= 10;
+            n_repet -= 10;
         break;
     case 10:
-        if (this->n_repet % 10 == 0)
-            this->n_repet += 9;
+        if (n_repet % 10 == 0)
+            n_repet += 9;
         else
-            this->n_repet--;
+            n_repet--;
         break;
 
     case 13:
-        if (this->interval_min_repet < 10)
-            this->interval_min_repet += 90;
+        if (interval_min_repet < 10)
+            interval_min_repet += 90;
         else
-            this->interval_min_repet -= 10;
+            interval_min_repet -= 10;
         break;
     case 14:
-        if (this->interval_min_repet % 10 == 0)
-            this->interval_min_repet += 9;
+        if (interval_min_repet % 10 == 0)
+            interval_min_repet += 9;
         else
-            this->interval_min_repet--;
+            interval_min_repet--;
         break;
 
     default:
@@ -155,36 +155,36 @@ void Alarm::print(const LiquidCrystal* lcd) const
     lcd->print(F("Al"));
 
     lcd->setCursor(3, 0);
-    if (this->hour_start < 10)
+    if (hour_start < 10)
     {
         lcd->print(0);
         lcd->setCursor(4, 0);
     }
-    lcd->print(this->hour_start);
+    lcd->print(hour_start);
 
     lcd->setCursor(6, 0);
-    if (this->minute_start < 10)
+    if (minute_start < 10)
     {
         lcd->print(0);
         lcd->setCursor(7, 0);
     }
-    lcd->print(this->minute_start);
+    lcd->print(minute_start);
 
     lcd->setCursor(9, 0);
-    if (this->n_repet < 10)
+    if (n_repet < 10)
     {
         lcd->print(0);
         lcd->setCursor(10, 0);
     }
-    lcd->print(this->n_repet);
+    lcd->print(n_repet);
 
     lcd->setCursor(13, 0);
-    if (this->interval_min_repet < 10)
+    if (interval_min_repet < 10)
     {
         lcd->print(0);
         lcd->setCursor(14, 0);
     }
-    lcd->print(this->interval_min_repet);
+    lcd->print(interval_min_repet);
 
     lcd->setCursor(5, 0);
     lcd->print(F(":"));
@@ -201,27 +201,27 @@ void Alarm::execute()
     int8_t minute_to_check;
     int8_t i;
 
-    for (i=0; i < this->n_repet; i++)
+    for (i=0; i < n_repet; i++)
     {
-        hour_to_check   = this->hour_start   + i * interval_min_repet / 60;
-        minute_to_check = this->minute_start + i * interval_min_repet % 60;
+        hour_to_check   = hour_start   + i * interval_min_repet / 60;
+        minute_to_check = minute_start + i * interval_min_repet % 60;
 
         if (hour_to_check == date->getHour() &&
             minute_to_check == date->getMinute())
         {
-            if (!this->is_alarm_on)
+            if (!is_alarm_on)
             {
                 Serial.println(F("Alarm ON"));
-                this->is_alarm_on = true;
+                is_alarm_on = true;
             }
             found = true;
             break;
         }
     }
 
-    if (!found && this->is_alarm_on)
+    if (!found && is_alarm_on)
     {
         Serial.println(F("Alarm OFF"));
-        this->is_alarm_on = false;
+        is_alarm_on = false;
     }
 }

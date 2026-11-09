@@ -18,88 +18,88 @@ Date::~Date()
 {
 }
 
-int8_t Date::getHour()   const { return this->hour; }
-int8_t Date::getMinute() const { return this->minute; }
+int8_t Date::getHour()   const { return hour; }
+int8_t Date::getMinute() const { return minute; }
 
 void Date::curUpDate(const int8_t pos_cursor)
 {
     switch (pos_cursor)
     {
     case 8:
-        if (this->day == 21 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
-            this->day = 1;
-        else if (this->day == 20 && this->month == 2)
-            this->day = 10;
-        else if (this->day == 21 && this->month == 2)
-            this->day = 11;
-        else if (this->day == 19 && this->month == 2 && this->year % 4 != 0)
-            this->day = 9;
-        else if (this->day > 30)
-            this->day -= 30;
-        else if (this->day == 30)
-            this->day = 10;
-        else if (this->day >= 22)
-            this->day -= 20;
+        if (day == 21 && (month == 4 || month == 6 || month == 9 || month == 11))
+            day = 1;
+        else if (day == 20 && month == 2)
+            day = 10;
+        else if (day == 21 && month == 2)
+            day = 11;
+        else if (day == 19 && month == 2 && year % 4 != 0)
+            day = 9;
+        else if (day > 30)
+            day -= 30;
+        else if (day == 30)
+            day = 10;
+        else if (day >= 22)
+            day -= 20;
         else
-            this->day += 10;
+            day += 10;
         break;
     case 9:
-        if (this->day == 29 && this->month == 2 && this->year % 4 == 0)
-            this->day = 20;
-        else if (this->day == 28 && this->month == 2 && this->year % 4 != 0)
-            this->day = 20;
-        else if (this->day == 30 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+        if (day == 29 && month == 2 && year % 4 == 0)
+            day = 20;
+        else if (day == 28 && month == 2 && year % 4 != 0)
+            day = 20;
+        else if (day == 30 && (month == 4 || month == 6 || month == 9 || month == 11))
             ;
-        else if (this->day == 31)
-            this->day = 30;
-        else if (this->day == 9)
-            this->day = 1;
-        else if (this->day % 10 == 9)
-            this->day -= 9;
+        else if (day == 31)
+            day = 30;
+        else if (day == 9)
+            day = 1;
+        else if (day % 10 == 9)
+            day -= 9;
         else
-            this->day++;
+            day++;
         break;
 
     case 11:
-        if (this->day == 31 && this->month == 1)
+        if (day == 31 && month == 1)
             ;
-        else if (this->month <= 2)
-            this->month += 10;
-        else if (this->month == 10)
-            this->month = 1;
-        else if (this->month > 10)
-            this->month -= 10;
+        else if (month <= 2)
+            month += 10;
+        else if (month == 10)
+            month = 1;
+        else if (month > 10)
+            month -= 10;
         break;
     case 12:
-        if (this->day == 31 && this->month != 7)
+        if (day == 31 && month != 7)
             ;
-        else if (this->day > 28 && this->month == 1 && this->year % 4 != 0)
+        else if (day > 28 && month == 1 && year % 4 != 0)
             ;
-        else if (this->day > 29 && this->month == 1 && this->year % 4 == 0)
+        else if (day > 29 && month == 1 && year % 4 == 0)
             ;
-        else if (this->month == 12)
-            this->month = 10;
-        else if (this->month == 9)
-            this->month = 1;
+        else if (month == 12)
+            month = 10;
+        else if (month == 9)
+            month = 1;
         else
-            this->month++;
+            month++;
         break;
 
     case 14:
-        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+        if (month == 2 && day == 29 && year % 4 == 0)
             ;
-        else if (this->year >= 90)
-            this->year -= 90;
+        else if (year >= 90)
+            year -= 90;
         else
-            this->year += 10;
+            year += 10;
         break;
     case 15:
-        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+        if (month == 2 && day == 29 && year % 4 == 0)
             ;
-        else if (this->year % 10 == 9)
-            this->year -= 9;
+        else if (year % 10 == 9)
+            year -= 9;
         else
-            this->year++;
+            year++;
         break;
 
     default:
@@ -111,76 +111,76 @@ void Date::curDownDate(const int8_t pos_cursor)
     switch (pos_cursor)
     {
     case 8:
-        if (this->day == 1 && (this->month == 2 || this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
-            this->day = 21;
-        else if (this->day == 9 && this->month == 2 && this->year % 4 != 0)
-            this->day = 19;
-        else if (this->day <= 1)
-            this->day += 30;
-        else if (this->day < 10)
-            this->day += 20;
-        else if (this->day == 10 && this->month == 2)
-            this->day = 20;
-        else if (this->day == 10)
-            this->day = 30;
+        if (day == 1 && (month == 2 || month == 4 || month == 6 || month == 9 || month == 11))
+            day = 21;
+        else if (day == 9 && month == 2 && year % 4 != 0)
+            day = 19;
+        else if (day <= 1)
+            day += 30;
+        else if (day < 10)
+            day += 20;
+        else if (day == 10 && month == 2)
+            day = 20;
+        else if (day == 10)
+            day = 30;
         else
-            this->day -= 10;
+            day -= 10;
         break;
     case 9:
-        if (this->day == 20 && this->month == 2 && this->year % 4 != 0)
-            this->day = 28;
-        else if (this->day == 30 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11))
+        if (day == 20 && month == 2 && year % 4 != 0)
+            day = 28;
+        else if (day == 30 && (month == 4 || month == 6 || month == 9 || month == 11))
             ;
-        else if (this->day == 30)
-            this->day = 31;
-        else if (this->day == 1)
-            this->day = 9;
-        else if (this->day % 10 == 0)
-            this->day += 9;
+        else if (day == 30)
+            day = 31;
+        else if (day == 1)
+            day = 9;
+        else if (day % 10 == 0)
+            day += 9;
         else
-            this->day--;
+            day--;
         break;
 
     case 11:
-        if (this->day == 31 && this->month == 1)
+        if (day == 31 && month == 1)
             ;
-        else if (this->month <= 2)
-            this->month += 10;
-        else if (this->month == 10)
-            this->month = 1;
-        else if (this->month > 10)
-            this->month -= 10;
+        else if (month <= 2)
+            month += 10;
+        else if (month == 10)
+            month = 1;
+        else if (month > 10)
+            month -= 10;
         break;
     case 12:
-        if (this->day == 31 && this->month != 8)
+        if (day == 31 && month != 8)
             ;
-        else if (this->day > 28 && this->month == 3 && this->year % 4 != 0)
+        else if (day > 28 && month == 3 && year % 4 != 0)
             ;
-        else if (this->day > 29 && this->month == 3 && this->year % 4 == 0)
+        else if (day > 29 && month == 3 && year % 4 == 0)
             ;
-        else if (this->month == 10)
-            this->month = 12;
-        else if (this->month == 1)
-            this->month = 9;
+        else if (month == 10)
+            month = 12;
+        else if (month == 1)
+            month = 9;
         else
-            this->month--;
+            month--;
         break;
 
     case 14:
-        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+        if (month == 2 && day == 29 && year % 4 == 0)
             ;
-        else if (this->year < 10)
-            this->year += 90;
+        else if (year < 10)
+            year += 90;
         else
-            this->year -= 10;
+            year -= 10;
         break;
     case 15:
-        if (this->month == 2 && this->day == 29 && this->year % 4 == 0)
+        if (month == 2 && day == 29 && year % 4 == 0)
             ;
-        else if (this->year % 10 == 0)
-            this->year += 9;
+        else if (year % 10 == 0)
+            year += 9;
         else
-            this->year--;
+            year--;
         break;
 
     default:
@@ -193,100 +193,101 @@ void Date::curUpTime(const int8_t pos_cursor)
     switch (pos_cursor)
     {
     case 8:
-        if (this->hour >= 20)
-            this->hour -= 20;
-        else if (this->hour > 13)
-            this->hour -= 10;
+        if (hour >= 20)
+            hour -= 20;
+        else if (hour > 13)
+            hour -= 10;
         else
-            this->hour += 10;
+            hour += 10;
         break;
     case 9:
-        if (this->hour == 23)
-            this->hour = 20;
-        else if (this->hour % 10 == 9)
-            this->hour -= 9;
+        if (hour == 23)
+            hour = 20;
+        else if (hour % 10 == 9)
+            hour -= 9;
         else
-            this->hour++;
+            hour++;
         break;
 
     case 11:
-        if (this->minute >= 50)
-            this->minute -= 50;
+        if (minute >= 50)
+            minute -= 50;
         else
-            this->minute += 10;
+            minute += 10;
         break;
     case 12:
-        if (this->minute % 10 == 9)
-            this->minute -= 9;
+        if (minute % 10 == 9)
+            minute -= 9;
         else
-            this->minute++;
+            minute++;
         break;
 
     case 14:
-        if (this->second >= 50)
-            this->second -= 50;
+        if (second >= 50)
+            second -= 50;
         else
-            this->second += 10;
+            second += 10;
         break;
     case 15:
-        if (this->second % 10 == 9)
-            this->second -= 9;
+        if (second % 10 == 9)
+            second -= 9;
         else
-            this->second++;
+            second++;
         break;
 
     default:
         break;
     }
 }
+
 void Date::curDownTime(const int8_t pos_cursor)
 {
     switch (pos_cursor)
     {
     case 8:
-        if (this->hour < 10)
+        if (hour < 10)
         {
-            if (this->hour >= 4)
-                this->hour += 10;
+            if (hour >= 4)
+                hour += 10;
             else
-                this->hour += 20;
+                hour += 20;
         }
         else
-            this->hour -= 10;
+            hour -= 10;
         break;
     case 9:
-        if (this->hour == 20)
-            this->hour = 23;
-        else if (this->hour % 10 == 0)
-            this->hour += 9;
+        if (hour == 20)
+            hour = 23;
+        else if (hour % 10 == 0)
+            hour += 9;
         else
-            this->hour--;
+            hour--;
         break;
 
     case 11:
-        if (this->minute < 10)
-            this->minute += 50;
+        if (minute < 10)
+            minute += 50;
         else
-            this->minute -= 10;
+            minute -= 10;
         break;
     case 12:
-        if (this->minute % 10 == 0)
-            this->minute += 9;
+        if (minute % 10 == 0)
+            minute += 9;
         else
-            this->minute--;
+            minute--;
         break;
 
     case 14:
-        if (this->second < 10)
-            this->second += 50;
+        if (second < 10)
+            second += 50;
         else
-            this->second -= 10;
+            second -= 10;
         break;
     case 15:
-        if (this->second % 10 == 0)
-            this->second += 9;
+        if (second % 10 == 0)
+            second += 9;
         else
-            this->second--;
+            second--;
         break;
 
     default:
@@ -296,93 +297,93 @@ void Date::curDownTime(const int8_t pos_cursor)
 
 void Date::secondCount()
 {
-    this->second++;
+    second++;
 
-    if (this->second == 60)
+    if (second == 60)
     {
-        this->second = 0;
-        this->minute++;
+        second = 0;
+        minute++;
     }
-    if (this->minute == 60)
+    if (minute == 60)
     {
-        this->minute = 0;
-        this->hour++;
+        minute = 0;
+        hour++;
     }
-    if (this->hour == 24)
+    if (hour == 24)
     {
-        this->hour = 0;
-        this->day++;
-    }
-
-    if ((this->day == 31 && (this->month == 4 || this->month == 6 || this->month == 9 || this->month == 11)) ||
-        (this->day == 29 && this->month == 2 && this->year % 4 != 0) ||
-        (this->day == 30 && this->month == 2 && this->year % 4 == 0) ||
-        this->day == 32)
-    {
-        this->day = 1;
-        this->month++;
-    }
-    if (this->month == 13)
-    {
-        this->month = 1;
-        this->year++;
+        hour = 0;
+        day++;
     }
 
-    if (this->year == 100)
+    if ((day == 31 && (month == 4 || month == 6 || month == 9 || month == 11)) ||
+        (day == 29 && month == 2 && year % 4 != 0) ||
+        (day == 30 && month == 2 && year % 4 == 0) ||
+        day == 32)
     {
-        this->year = 0;
+        day = 1;
+        month++;
+    }
+    if (month == 13)
+    {
+        month = 1;
+        year++;
+    }
+
+    if (year == 100)
+    {
+        year = 0;
     }
 }
 
 void Date::printDateAndTime(const LiquidCrystal* lcd) const
 {
     lcd->setCursor(4, 1);
-    if (this->day < 10)
+    if (day < 10)
     {
         lcd->print(0);
         lcd->setCursor(5, 1);
     }
-    lcd->print(this->day);
+    lcd->print(day);
 
     lcd->setCursor(7, 1);
-    if (this->month < 10)
+    if (month < 10)
     {
         lcd->print(0);
         lcd->setCursor(8, 1);
     }
-    lcd->print(this->month);
+    lcd->print(month);
 
     lcd->setCursor(10, 1);
-    if (this->year < 10)
+    if (year < 10)
     {
         lcd->print(0);
         lcd->setCursor(11, 1);
     }
-    lcd->print(this->year);
+    lcd->print(year);
 
     lcd->setCursor(4, 0);
-    if (this->hour < 10)
+    if (hour < 10)
     {
         lcd->print(0);
         lcd->setCursor(5, 0);
     }
-    lcd->print(this->hour);
+    lcd->print(hour);
 
     lcd->setCursor(7, 0);
-    if (this->minute < 10)
+    if (minute < 10)
     {
         lcd->print(0);
         lcd->setCursor(8, 0);
     }
-    lcd->print(this->minute);
+    lcd->print(minute);
 
     lcd->setCursor(10, 0);
-    if (this->second < 10)
+    if (second < 10)
     {
         lcd->print(0);
         lcd->setCursor(11, 0);
     }
-    lcd->print(this->second);
+    lcd->print(second);
 
     lcd->setCursor(6, 0);
     lcd->print(F(":"));
@@ -399,7 +400,7 @@ void Date::printDate(const LiquidCrystal* lcd) const
     lcd->setCursor(0, 0);
     lcd->print(F("Date"));
 
-    if (this->day >= 10)
+    if (day >= 10)
         lcd->setCursor(8, 0);
     else
     {
@@ -408,9 +409,9 @@ void Date::printDate(const LiquidCrystal* lcd) const
 
         lcd->setCursor(9, 0);
     }
-    lcd->print(this->day);
+    lcd->print(day);
 
-    if (this->month >= 10)
+    if (month >= 10)
         lcd->setCursor(11, 0);
     else
     {
@@ -419,9 +420,9 @@ void Date::printDate(const LiquidCrystal* lcd) const
 
         lcd->setCursor(12, 0);
     }
-    lcd->print(this->month);
+    lcd->print(month);
 
-    if (this->year >= 10)
+    if (year >= 10)
         lcd->setCursor(14, 0);
     else
     {
@@ -430,7 +431,7 @@ void Date::printDate(const LiquidCrystal* lcd) const
 
         lcd->setCursor(15, 0);
     }
-    lcd->print(this->year);
+    lcd->print(year);
 
     lcd->setCursor(10, 0);
     lcd->print(F("/"));
@@ -443,7 +444,7 @@ void Date::printTime(const LiquidCrystal* lcd) const
     lcd->setCursor(0, 0);
     lcd->print(F("Time"));
 
-    if (this->hour >= 10)
+    if (hour >= 10)
         lcd->setCursor(8, 0);
     else
     {
@@ -452,9 +453,9 @@ void Date::printTime(const LiquidCrystal* lcd) const
 
         lcd->setCursor(9, 0);
     }
-    lcd->print(this->hour);
+    lcd->print(hour);
 
-    if (this->minute >= 10)
+    if (minute >= 10)
         lcd->setCursor(11, 0);
     else
     {
@@ -463,9 +464,9 @@ void Date::printTime(const LiquidCrystal* lcd) const
 
         lcd->setCursor(12, 0);
     }
-    lcd->print(this->minute);
+    lcd->print(minute);
 
-    if (this->second >= 10)
+    if (second >= 10)
         lcd->setCursor(14, 0);
     else
     {
@@ -474,7 +475,7 @@ void Date::printTime(const LiquidCrystal* lcd) const
 
         lcd->setCursor(15, 0);
     }
-    lcd->print(this->second);
+    lcd->print(second);
 
     lcd->setCursor(10, 0);
     lcd->print(F(":"));
@@ -482,19 +483,18 @@ void Date::printTime(const LiquidCrystal* lcd) const
     lcd->print(F(":"));
 }
 
-
 void Date::update()
 {
-    this->current_millis = millis();
-    if (this->current_millis - this->previous_millis >= 1000)
+    current_millis = millis();
+    if (current_millis - previous_millis >= 1000)
     {
-        this->previous_millis = this->current_millis;
-        this->secondCount();
+        previous_millis = current_millis;
+        secondCount();
     }
 }
 
 void Date::execute()
 {
-    if (this->is_running)
-        this->update();
+    if (is_running)
+        update();
 }
