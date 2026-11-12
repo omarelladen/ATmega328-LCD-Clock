@@ -1,4 +1,4 @@
-SRC = src/main.ino
+SKETCH = src/main.ino
 PORT = /dev/ttyACM0
 BOARD = "arduino:avr:uno"
 
@@ -10,10 +10,10 @@ all: verify
 verify:
 	arduino --verify \
 	        --board $(BOARD) \
-	        $(SRC)
+	        $(SKETCH)
 
 upload:
 	arduino --upload \
 	        --board $(BOARD) \
 	        --port $(PORT) \
-	        $(SRC)
+	        $(SKETCH)
